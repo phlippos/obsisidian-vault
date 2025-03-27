@@ -1,0 +1,245 @@
+Specifying a large digital system with a state table can be extremely challenging due to the potentially enormous number of states. To manage this complexity, digital systems are designed using a modular approach, partitioning the system into subsystems, each performing a specific function.
+- **Modular Approach:** The system is divided into smaller subsystems, each responsible for a distinct function.
+- **Digital Devices:** These subsystems are constructed using various digital devices such as registers, decoders, multiplexers, arithmetic elements, and control logic.
+- **Interconnection:** The modules are interconnected using data paths and control signals to form a cohesive digital system.
+### Register Transfer Level (RTL) Design
+- The modules of a digital system are best defined by a set of registers and the operations performed on the binary information stored in them. Examples of register operations include load, shift, clear, and increment. Registers are considered the basic components of the processor in a digital system. The information flow and processing performed on the data stored in the registers are referred to as register transfer operations.
+	- The set of registers in the system.
+	- The operations performed on the data stored in the registers.
+	- The control that supervises the sequence of operations in the system.
+- Registers
+	- A hardware register is a connected group of flip-flops that stores binary information and can perform one or more elementary operations. A register can load new information or shift its contents to the right or left. A counter is a register that increments a number by a fixed value (e.g., 1). A flip-flop is a one-bit register that can be set, cleared, or complemented. In fact, the flip-flops and associated gates of any sequential circuit can be called registers by this definition.
+- Register Operations
+	- The operations executed on the information stored in registers are elementary operations performed in parallel on the bits of a data word during one clock cycle.
+	- The data produced by the operation may replace the binary information in the register before the operation or be transferred/copied to another register, leaving the original register contents unchanged.
+- Register Transfer Operations
+	- Information transfer from one register to another is designated in symbolic form by means of a replacement operator. The statement R2←R1 denotes a transfer of the contents of register R1 into register R2. For example, an eight-bit register R2 holding the value 01011010 could have its contents replaced by R1 holding the value 10100101. By definition, the contents of the source register R1 do not change after the transfer; they are merely copied to R2. The arrow symbolizes the transfer and its direction.
+- Conditional Register Transfer
+	- A statement specifying a register transfer operation implies that a datapath is available from the outputs of the source register to the inputs of the destination register and that the destination register has a parallel load capability. Data can also be transferred serially between registers by repeatedly shifting their contents along a single wire, one bit at a time, taking multiple clock cycles.
+	- A conditional statement governing a register transfer operation is symbolized with an if–then statement, such as:
+		- If (T1 = 1) then (R2←R1)
+		- where T1 is a control signal generated in the control section. Although the clock is not included explicitly as a variable in the register transfer statements, it is assumed that all transfers occur at a clock-edge transition.
+- ![[Pasted image 20250102143249.png]]
+- ![[Pasted image 20250102143301.png]]
+- ![[Pasted image 20250102143434.png]]
+- ![[Pasted image 20250102143845.png]]
+- Operations in Digital Systems
+	- The types of operations most often encountered in digital systems can be classified into four categories:
+		- **Transfer Operations:** Transfer (i.e., copy) data from one register to another.
+		- **Arithmetic Operations:** Perform arithmetic (e.g., addition, multiplication) on data in registers.
+		- **Logic Operations:** Perform bit manipulation (e.g., logical OR, AND) of nonnumeric data in registers.
+		- **Shift Operations:** Shift data within a register.
+	- Transfer Operations
+		- The transfer operation does not change the information content of the data being moved from the source register to the destination register unless the source and destination are the same.
+	- Arithmetic Operations
+		- Arithmetic operations perform calculations on numeric data. Examples include addition, subtraction, multiplication, and division. These operations change the information content of the data in the registers.
+	- Logic Operations
+		- Logic operations manipulate the individual bits of data. Examples include logical AND, OR, NOT, and XOR. These operations also change the information content of the data in the registers.
+	- Shift Operations
+		- Shift operations move the data within a register to the left or right. They can be used for operations such as multiplication or division by powers of two.
+- ![[Pasted image 20250102144446.png]]
+- ![[Pasted image 20250102144524.png]]
+- ![[Pasted image 20250102144534.png]]
+### Algorithmic State Machines (ASMs)
+- In digital systems, the binary information stored can be classified into two categories: **data** and **control information**.
+- Data
+	- Discrete elements of information (binary words) manipulated by performing arithmetic, logic, shift, and other data-processing operations.
+	- Implemented with digital hardware components such as adders, decoders, multiplexers, counters, and shift registers.
+- Control Information
+	- Provides command signals that coordinate and execute various operations in the data section to accomplish desired data-processing tasks.
+- Design of Logic in Digital Systems
+	- The design of the logic in digital systems involves two distinct efforts:
+		- **Designing Digital Circuits for Data-Processing Operations:** Focuses on circuits that perform arithmetic, logic, and shift operations on data.
+		- **Designing Control Circuits:** Determines the sequence in which various data manipulations are performed.
+	- ![[Pasted image 20250102145548.png]]
+	- **Datapath Unit:** Manipulates data in registers according to system requirements.Contains data registers, arithmetic logic units (ALUs), multiplexers, etc., that perform the actual data processing.
+	- **Control Unit:** Issues commands to the datapath unit, coordinated through a finite state machine (FSM). Generates control signals based on the current state of the system and external inputs to manage the operations of the datapath.
+- Feedback Path
+	- An internal feedback path from the datapath unit to the control unit provides status conditions that, together with external inputs, determine the sequence of control signals directing the datapath unit's operations. In a digital system, the control unit (usually a finite state machine or FSM) needs to know the current state and conditions of the datapath unit to make decisions about what actions to take next. This information is provided through a feedback path.
+	- The feedback path is a communication link from the datapath back to the control unit.
+	- It provides status conditions (signals) to the control unit about the current state of operations in the datapath.
+	- How It Works
+		- **Datapath Operations:** As the datapath processes data, it generates status signals. These signals can indicate various conditions such as:
+			- Whether a computation is complete
+			- If an overflow occurred during an arithmetic operation
+			- If a particular register is empty or full
+			- If a specific condition (e.g., equality check) is met
+		-  **Feedback Signals:** These status signals are sent back to the control unit via the feedback path.
+		-  **Control Decisions:** The control unit uses these feedback signals, along with the external inputs, to determine the next state and the sequence of control signals to send to the datapath.
+		- **Control Signals:** Based on the feedback and external inputs, the control unit generates the appropriate control signals to direct the datapath to perform the next operation.
+		- //
+			- **Initial State:** The control unit instructs the datapath to add two numbers
+			- **Datapath Operation:** The datapath performs the addition and generates an overflow signal if the result exceeds the maximum value that can be stored.
+			- **Feedback:** The overflow signal is sent back to the control unit via the feedback path.
+			- **Control Decision:** The control unit receives the overflow signal and decides to handle the overflow condition (e.g., by storing the overflow flag or adjusting the result).
+			- **Next State:** Based on the overflow condition and other inputs, the control unit moves to the next state to continue processing.
+### ASM Chart
+- ASMs, or Algorithmic State Machines, provide a systematic way to design and describe the behavior of digital systems. Unlike conventional flowcharts that focus purely on the sequence of steps, ASM charts capture both the sequence of events and their timing relationships. This is particularly useful for specifying the control sequences and data path operations in digital hardware.
+- Elements of ASM Charts
+	-  **State Box**
+	- **Decision Box**
+	- **Conditional Box**
+- These elements are connected by directed edges to indicate the sequence of operations and state transitions.
+- State Box
+	- **Purpose**: Represents a state in the control sequence.
+	- **Shape**: Rectangular.
+	- **Contents**: The register operations or output signals that occur during that state.
+	- **Symbolic Name**: Placed in the upper left corner of the box.
+	- **Binary Code**: Placed in the upper right corner of the box
+	- ![[Pasted image 20250102163248.png]]
+	- The state is named `S_pause`.
+	- The binary code for the state is `0101`.
+	- The operation `R <- 0` clears register `R` to `0` during the transition to the next state.
+	- `Start_OP_A` is a Moore-type output signal asserted while in the `S_pause` state.
+- Decision Box
+	- **Purpose**: Describes the effect of an input or status signal on the control subsystem.
+	- **Shape**: Diamond.
+	- **Contents**: The condition being tested.
+	- **Exit Paths**: Two or more, indicating the possible state transitions based on the condition.
+- ![[Pasted image 20250102163419.png]]
+- Conditional Box
+	- **Purpose**: Specifies conditions that must be met for certain operations to occur.
+	- **Shape**: Typically rectangular with the condition written inside. 
+	- **Use**: Often used to represent conditions that control the execution of certain operations within a state.
+	- ![[Pasted image 20250102163627.png]]
+	- ![[Pasted image 20250102163734.png]]
+### ASM Block
+- An ASM block is a structure in an ASM chart that consists of:
+	- One state box
+	- All decision and conditional boxes connected to its exit path
+- An ASM block has
+	- One entrance
+	- **Multiple exit paths**, defined by the structure of the decision boxes
+- ![[Pasted image 20250102164304.png]]
+- ![[Pasted image 20250102164354.png]]
+- ![[Pasted image 20250102164536.png]]
+- ![[Pasted image 20250102193234.png]]
+- ![[Pasted image 20250102193246.png]]
+- ![[Pasted image 20250102193258.png]]
+- ![[Pasted image 20250102193310.png]]
+- ![[Pasted image 20250102193329.png]]
+- //
+- ![[Pasted image 20250102193748.png]]
+- ![[Pasted image 20250102193922.png]]
+- ![[Pasted image 20250102194123.png]]
+
+### Sequential Binary Multiplier
+- A sequential binary multiplier is designed to multiply two unsigned binary numbers using a more hardware-efficient approach compared to a combinational multiplier. This efficiency is achieved by using only one adder and a shift register, rather than multiple adders and AND gates.
+- **Registers**: Store the multiplicand, multiplier, and the partial product.
+- **Control Unit**: A state machine controls the sequence of operations, including shifting and adding.
+- Algorithm for Sequential Binary Multiplication
+	- **Initialization**:
+		- Load the multiplicand and multiplier into registers.
+		- Initialize the partial product register to zero.
+	- **Iteration** (for each bit of the multiplier):
+		- Check the LSB of the multiplier.
+		- If the LSB is 1, add the multiplicand to the partial product.
+		- Shift the multiplicand left by one position.
+		- Shift the multiplier right by one position.
+		- Shift the partial product right by one position.
+	- **Repeat** the iteration until all bits of the multiplier are processed.
+![[Pasted image 20250102200113.png]]
+![[Pasted image 20250102200126.png]]
+![[Pasted image 20250102200153.png]]
+![[Pasted image 20250102200212.png]]
+
+![[Pasted image 20250102200343.png]]
+
+![[Pasted image 20250102200629.png]]
+![[Pasted image 20250102201019.png]]
+![[Pasted image 20250102201915.png]]
+- ![[Pasted image 20250102194418.png]]
+- ![[Pasted image 20250102194616.png]]
+- ![[Pasted image 20250102201405.png]]
+- ![[Pasted image 20250102201506.png]]
+- ![[Pasted image 20250102201821.png]]
+- State Assignment
+	- In digital design, state assignment involves encoding the states of a finite state machine (FSM) into binary values. This is a crucial step in the design process as it affects the complexity of the resulting logic.
+	- Types of State Assignments:
+		- **Binary Encoding**:
+			- The simplest form of state assignment.
+			- States are assigned sequential binary numbers.
+			- For `n` states, the number of bits required is `ceil(log2(n))`.
+			- Example: For four states (S0, S1, S2, S3):
+				- S0 = 00
+				- S1 = 01
+				- S2 = 10
+				- S3 = 11
+		- **Gray Code**:
+			- A binary numeral system where two successive values differ in only one bit.
+			- Reduces errors in digital systems by minimizing the number of transitions.
+			- S0 = 00 
+			- S1 = 01
+			- S2 = 11
+			- S3 = 10
+		- **One-Hot Encoding**:
+			- Uses one flip-flop per state
+			- At any given time, only one bit is `1` (hot) and the rest are `0` (cold).
+			- Simpler decoding logic for next state and output generation.
+			- S0 = 0001
+			- S1 = 0010
+			- S2 = 0100 
+			- S3 = 1000
+			- Benefits of One-Hot Encoding
+				- **Simplified Decoding Logic**: The next state and output logic become simpler since each state is represented by a single bit.
+				- **Speed**: The decoding logic does not become more complex as the number of states increases, allowing the machine to operate at higher speeds.
+### Sequence Register and Decoder Design Method
+ The sequence-register-and-decoder method is a manual technique used in designing control circuits. It involves using a register to hold the current state and a decoder to generate the output corresponding to each state. This method simplifies the design process by leveraging the decoding logic to directly form the control outputs.
+	-  Components of the Method
+		- **Sequence Register**:
+			- A register with `n` flip-flops can represent up to `2^n` states.
+			- The state transitions are managed by the associated gates.
+		- **Decoder**:
+			- An `n`-to-`2^n` line decoder provides outputs for each possible state of the sequence register.
+			- The outputs are used to generate Moore-type outputs directly.
+			- Mealy-type outputs are formed from the combination of Moore outputs and the inputs.
+	- Example: Binary Multiplier Controller
+		- Consider a binary multiplier with three states and two inputs. The states are:
+			- **S_idle**: Initialization state
+			- **S_add**: Addition state
+			- **S_shift**: Shifting state
+		- State Encoding
+			- We assign binary codes to the states using two flip-flops, `G1` and `G0`:
+				- S_idle: `G1G0 = 00`
+				- S_add: `G1G0 = 01`
+				- S_shift: `G1G0 = 10`
+		- ![[Pasted image 20250102204042.png]]
+		- Decoder Logic
+			- The Moore-type outputs are determined solely by the present state. The control circuit's outputs are generated using a decoder:
+				- T0 S_idle
+				- T1 S_add
+				- T2 S_shift
+		- ![[Pasted image 20250102204245.png]]
+		- ![[Pasted image 20250102204306.png]]
+
+### Design With Multiplexers
+- The design method using multiplexers involves implementing a combinational circuit with multiplexers instead of individual gates. This results in a more regular and structured design with three levels of components:
+	- **First Level**: Multiplexers that determine the next state of the register.
+	- **Second Level**: A register that holds the present binary state.
+	- **Third Level**: A decoder that asserts a unique output line for each control state.
+- This method can be particularly useful for designing control circuits with a predefined standard cell structure in integrated circuits.
+- Example: ASM Chart with Four States and Four Control Inputs
+	- Consider the ASM chart with four states and four control inputs (`w`, `x`, `y`, `z`). The binary assignments for each state are indicated in the state boxes. The state transitions depend on the control inputs, and the state diagram does not include datapath register operations or output signals of the controller.
+	- ![[Pasted image 20250102221219.png]]
+	- ![[Pasted image 20250102221532.png]]
+	- ![[Pasted image 20250102221502.png]]
+	- ![[Pasted image 20250102222535.png]]
+	- //
+	- Ones Counter Design with Multiplexers
+		- The ones counter system uses two registers, R1 and R2, and a flip-flop E to count the number of 1’s in a binary word loaded into R1. The count of 1’s is stored in R2. The design follows a three-level implementation with multiplexers, a register, and a decoder.
+		- Components
+			- **Registers**:
+				- R1: Shift register holding the binary word.
+				- R2: Counter with parallel load, holds the count of 1's.
+				- E: Flip-flop used to check each bit of R1.
+			- **Control Signals**:
+				- `Start`: Initiates the operation.
+				- `Ready`: Indicates the status of the machine.
+				- `Zero`: Indicates if R1 is empty (all 0’s).
+				- `E`: Indicates if the current bit in R1 is 1.
+			- ![[Pasted image 20250102223010.png]]
+			- ![[Pasted image 20250102223349.png]]
+			- ![[Pasted image 20250102223143.png]]
+			- ![[Pasted image 20250102223150.png]]
+			- ![[Pasted image 20250102223329.png]]
+			- ![[Pasted image 20250102223441.png]]

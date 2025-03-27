@@ -1,0 +1,366 @@
+### Memory unit
+- A memory unit stores and retrieves binary information for processing in digital systems.
+- Data Flow:
+	- Information is transferred from memory to registers in the processing unit for data processing.
+	- Intermediate and final results from processing are stored back in memory.
+	- Input device data is stored in memory, and output device data is retrieved from memory.
+- Types of Memories:
+	- Random-Access Memory (RAM):
+		- Stores new information for later use.
+		- **Write Operation:** Storing new information.
+		- **Read Operation:** Retrieving stored information.
+		- RAM can perform both write and read operations.
+	- Read-Only Memory (ROM):
+		- Stores information that can only be read, not altered.
+		- **Programming:** Hardware procedure specifying the bits inserted into the device.
+		- ROM is a type of Programmable Logic Device (PLD).
+	- Programmable Logic Devices (PLDs):
+		- **Types of PLDs:**
+			- ROM
+			- Programmable Logic Array (PLA)
+			- Programmable Array Logic (PAL)
+			- Field-Programmable Gate Array (FPGA)
+		- PLD Configuration:
+			- An integrated circuit with internal logic gates connected through electronic paths (similar to fuses).
+			- **Programming:** Involves blowing fuses along paths to create the desired logic function.
+			- **Example:** CMOS FPGAs are configured by downloading a bitstream to establish internal connectivity for specified logic functions (combinational or sequential).
+### RAM
+- Components of a Memory Unit:
+	- **Storage Cells:** The fundamental building blocks that hold binary data (0s and 1s).
+	- **Associated Circuits:** Includes the necessary circuitry for reading (retrieving) and writing (storing) data.
+- Architecture and Functionality
+	- **Selective Retrieval:** The architecture of the memory unit allows information to be retrieved from any internal location without sequentially searching through other data. This capability enables fast and efficient data access.
+	- **Uniform Access Time:** The time it takes to access information from any random location in the memory unit is consistent. This characteristic gives rise to the term **random-access memory (RAM)**.
+- Random-Access Memory (RAM)
+	- **Definition:** A type of memory where the time to read or write data is the same for any memory location.
+	- In a memory unit, information is stored in **groups of bits** called **words**.
+	- Memory Word
+		- A **word** in memory is a collection of bits that is treated as a unit.
+		- **Word size** refers to the number of bits in a word, and it can vary depending on the computer architecture (e.g., 16-bit, 32-bit, or 64-bit words).
+		- The word may represent different types of data:
+			- **Numbers** (binary representation of integers or floating-point values)
+			- **Instructions** (machine code used by the processor)
+			- **Alphanumeric Characters** (letters and digits encoded in binary formats such as ASCII or Unicode)
+			- Other binary-coded information
+	- Communication Between Memory and Its Environment
+		- Data Input and Output Lines
+			- **Data Input Lines**: These lines are used to transfer information **into** the memory unit. The number of input lines (n) determines how much data can be transferred at once. For example, if a memory word is 16 bits, then there will be 16 data input lines.
+			- **Data Output Lines**: These lines are used to transfer information **out of** the memory unit. The number of output lines (n) corresponds to the amount of data that can be retrieved at once. If the memory word is 16 bits, then 16 data output lines are used.
+		- Address Lines
+			- **Address Lines**: These are used to **select** a particular memory location or **word** within the memory. The number of address lines (k) specifies how many unique locations can be addressed. For example, if you have 4 address lines, you can access 16 different locations (2^4 = 16).
+		- Control Lines
+			- **Write Input**: This control input signals that the memory should store data coming from the input lines. When the **Write** line is activated, data is written into the memory at the address specified by the address lines.
+			- **Read Input**: This control input signals that the memory should output data to the data output lines. When the **Read** line is activated, data is retrieved from the memory location specified by the address lines and sent out through the data output lines.
+	- Memory Unit Size and Addressing
+		- The **size** and **organization** of a memory unit are typically specified by two key factors:
+			- **Number of Words**: This refers to the total number of distinct locations (or units) in memory that can each store a word of data.
+			- **Number of Bits per Word**: This defines the size of each individual word in the memory. For example, if the word size is 16 bits, each memory location will store 16 bits of data.
+		- Memory Addressing
+			- **Address Lines**: The number of address lines, denoted as **k**, determines how many unique memory locations can be accessed. The total number of memory locations is **2^k**, where **k** is the number of address lines.
+			- //
+				- **10 address lines** can select from **2^10 = 1,024 words**.
+				- **32 address lines** can select from **2^32 = 4,294,967,296 words**
+				- 
+			- **Addressing**: Each word in memory is assigned an **address**, which is a unique identification number. The addresses start from 0 and go up to **2^k - 1**, where **k** is the number of address lines.
+			- **Internal Decoder**: When an address is provided (using the address lines), an internal **decoder** in the memory system processes the address and opens the corresponding memory path to access the word at that location.
+		- Memory Sizes
+			- **K (kilo)**: Refers to **2^10** (1,024) words or bytes
+				- Example: **64K = 64 * 2^10 = 2^16** words or bytes.
+			- ![[Pasted image 20241214194950.png]]
+- Write and Read Operations
+	- the write signal specifies a transfer-in operation and the read signal specifies a transfer-out operation. On accepting one of these control signals, the internal circuits inside the memory provide the desired operation.
+	- The steps that must be taken for the purpose of transferring a new word to be stored into memory are as follows:
+		- Apply the binary address of the desired word to the address lines.
+		- Apply the data bits that must be stored in memory to the data input lines.
+		- Activate the write input.
+		- The memory unit will then take the bits from the input data lines and store them in the word specified by the address lines.
+	- The steps that must be taken for the purpose of transferring a stored word out of memory are as follows:
+		- Apply the binary address of the desired word to the address lines.
+		- Activate the read input.
+		- The memory unit will then take the bits from the word that has been selected by the address and apply them to the output data lines. The contents of the selected word do not change after the read operation, that is, the read operation is nondestructive.
+	- In commercial memory components, the memory operations are controlled using two inputs: **Memory Enable** (sometimes called **Chip Select**) and **Read/Write**. These inputs are used to select the memory unit and determine the operation to perform.
+	- Memory Enable (Chip Select)
+		- **Memory Enable** is used to select a specific memory chip in systems with multiple memory chips (such as in large memory systems).
+		- If **Memory Enable** is inactive (low or 0), the memory chip is **not selected**, and no operation can be performed, regardless of the state of the **Read/Write** input.
+		- If **Memory Enable** is active (high or 1), the memory chip is **selected**, and the **Read/Write** input determines whether the operation will be a **read** or a **write**.
+	- Read/Write Input
+		- **Read/Write** specifies the type of operation when the memory chip is enabled
+			- **Read operation**: Data is retrieved from the memory (output operation).
+			- **Write operation**: Data is stored into the memory (input operation).
+	- ![[Pasted image 20241214195704.png]]
+- Timing waveforms
+	- **Memory Control by CPU**: The memory unit's read and write operations are controlled by an external device like a CPU, which is synchronized by its own clock.
+	- **Access Time and Cycle Time**:
+		- **Access Time**: The time required to select and read a word from memory.
+		- **Cycle Time**: The time required to complete a write operation.
+	- Synchronization
+		- The CPU must synchronize its clocked operations with the memory's read and write operations.
+		- The memory’s access and cycle times must be within a fixed number of CPU clock cycles.
+		- //
+			- **CPU Clock Frequency**: 50 MHz (Period of 20 ns per clock cycle).
+			- **Memory Access/Cycle Time**: 50 ns.
+			- In this scenario, each memory operation (read or write) requires at least two-and-a-half, possibly three, CPU clock cycles.
+	- ![[Pasted image 20241215131544.png]]
+	- Write Cycle 
+		- **Clock Cycles**: T1, T2, and T3 (each 20 ns).
+		- **Address and Data Lines**: The CPU provides the address and input data at the beginning of T1.
+		- **Control Signals**:
+		    - **Memory Enable**: Activates after address lines are stable.
+		    - **Read/Write Signal**: Switches to low level for write operation.
+		- **Timing**:
+		    - Control signals remain active for at least 50 ns.
+		    - Address and data signals must remain stable for a short time after control signals deactivate.
+		- **Completion**: The write operation completes by the end of T3, and the next T1 cycle can begin.
+	- Read Cycle
+		- **Address**: Provided by the CPU.
+		- Control Signals
+			- **Memory Enable**: High level for read operation.
+			- **Read/Write Signal**: High level for read operation.
+		- **Timing**:
+			- Memory outputs data within 50 ns of memory enable activation.
+			- CPU transfers data into an internal register during the negative transition of T3.
+		- **Completion**: The next T1 cycle is available for another memory request.
+- Types of memories
+	- The way a memory system accesses data is determined by the type of components used. Memory systems can be categorized based on their access methods and other characteristics.
+		- Random-Access Memory (RAM)
+			- **Definition**: RAM allows data to be read or written in almost the same amount of time irrespective of the data's physical location in memory.
+			- Each word location is separate and can be accessed directly.
+			- Fixed access time for all locations.
+		- Sequential-Access Memory
+			- **Definition**: In sequential-access memory, data is accessed in a predetermined, ordered sequence.
+			- // Magnetic disks or tape units.
+			- Access time depends on the position of the read/write head relative to the data.
+			- Variable access time as data is read sequentially.
+		- Static RAM (SRAM)
+			- **Definition**: SRAM uses latches to store binary information.
+			- Data is retained as long as power is supplied.
+			- Does not require periodic refreshing.
+			- Faster read and write cycles.
+			- Consumes more power compared to DRAM.
+			- Easier to use.
+		- Dynamic RAM (DRAM)
+			- **Definition**: DRAM stores data as electric charges in capacitors, with each bit of data stored in a separate capacitor within an integrated circuit, and the charge is maintained by MOS transistors.
+			- Requires periodic refreshing to maintain data integrity.
+			- **Refreshing**: Needs to be refreshed periodically (every few milliseconds) to prevent data loss. The refresh operation involves reading the data and then rewriting it to restore the charge
+			- Consumes less power and has a larger storage capacity in a single chip compared to SRAM.
+			- More complex to use due to the need for refreshing.
+		-  Volatile Memory
+			- **Definition**: Volatile memory loses its data when the power is turned off.
+			- **Examples**: Both SRAM and DRAM (CMOS integrated circuit RAMs).
+			- **Characteristics**:
+			    - Requires continuous power to maintain stored information.
+		- Nonvolatile Memory
+			- **Definition**: Nonvolatile memory retains data even after the power is turned off.
+			- **Examples**: Magnetic disks, ROM (Read-Only Memory), and FeRAM (Ferroelectric RAM).
+			- **Characteristics**:
+			    - Data retention due to mechanisms like magnetization (in magnetic disks) or stored charges.
+			    - Suitable for storing programs and data that need to be preserved after power loss.
+			    - ROM is used for storing firmware that is not meant to be altered.
+			    - Magnetic disks are used for larger, alterable programs and data, often transferred to RAM as needed.
+			    - FeRAM provides a nonvolatile memory option with potential benefits over traditional nonvolatile memories.
+
+
+### Memory Decoding
+- In addition to requiring storage components in a memory unit, there is a need for decoding circuits to select the memory word specified by the input address.
+- **Internal Construction**
+	- The internal construction of a RAM of m words and n bits per word consists of m * n binary storage cells and associated decoding circuits for selecting individual words.
+	- The binary storage cell is the basic building block of a memory unit.
+	- Actually, the cell is an electronic circuit with four to six transistors.
+	- The binary cell stores one bit in its internal latch.
+	- ![[Pasted image 20241215134047.png]]
+	- The select input enables the cell for reading or writing
+	- the read/ write input determines the operation of the cell when it is selected.
+		- A 1 in the read/ write input provides the read operation by forming a path from the latch to the output terminal. A 0 in the read/write input provides the write operation by forming a path from the input terminal to the latch.
+	- ![[Pasted image 20241215134403.png]]
+	- This RAM consists of four words of four bits each and has a total of 16 binary cells. The small blocks labeled BC represent the binary cell with its three inputs and one output
+	- A memory with four words needs two address lines. The two address inputs go through a 2 * 4 decoder to select one of the four words.
+	- The decoder is enabled with the memory enable input.When the memory enable is 0, all outputs of the decoder are 0 and none of the memory words are selected.
+- **Coincident Decoding**
+	- Two-Dimensional Decoding
+		- Decoding a memory address in a one-dimensional array involves using a single decoder with k inputs and 2^k outputs. This method requires 2^k AND gates with k inputs each. However, the number of gates and the number of inputs per gate can be reduced by employing a two-dimensional selection scheme.
+		- Two-Dimensional Selection Scheme
+			- In a two-dimensional decoding scheme, memory cells are arranged in an array close to a square configuration. This approach uses two decoders, each with k/2​ inputs, instead of one decoder with k inputs. One decoder selects the row, and the other selects the column, in a matrix configuration.
+			- //
+				- **1D Decoder**: A single 10-to-1,024 decoder requires 1,024 AND gates, each with 10 inputs.
+				- **2D Decoder**: Two 5-to-32 decoders replace the single 10-to-1,024 decoder. This configuration uses 64 AND gates, each with 5 inputs.
+		- Addressing in 2D Decoding
+			- **Inputs**:
+				- The 10-bit address is split into two 5-bit parts.
+				- The most significant 5 bits (MSBs) are fed to the X decoder.
+				- The least significant 5 bits (LSBs) are fed to the Y decoder.
+			- **Selection Process**:
+				- The X decoder selects one of the 32 rows.
+				- The Y decoder selects one of the 32 columns.
+				- The intersection of the selected row and column identifies the specific word in memory.
+			- ![[Pasted image 20241215135958.png]]
+			- Example Address: 404
+				- **Binary Representation**: 404 in binary is 01100 10100.
+				-  **Decoding**:
+				    - X decoder input: 01100 (binary 12)
+				    - Y decoder input: 10100 (binary 20)
+				- Result
+					- The word at row 12 and column 20 is selected.
+- Address Multiplexing
+	- Dynamic Random Access Memory (DRAM) achieves higher density and lower cost per bit compared to Static RAM (SRAM) by using a single MOS transistor and a capacitor for each memory cell. The simpler cell structure allows for a greater memory capacity on a given chip size. DRAM cells, however, require periodic refreshing to maintain the stored charge.
+	- DRAM typically uses a two-dimensional array of memory cells organized into rows and columns. To reduce the number of pins required on the DRAM chip, the address is split into two parts: the row address and the column address.
+	- By using the same set of address pins for both the row and column addresses, fewer pins are needed, which simplifies the design and reduces the cost of the memory chip.
+	- By storing the addresses in registers, the switching noise and crosstalk on the address lines are minimized. This leads to more reliable operation, especially in high-speed memory systems where noise and signal integrity are significant concerns.
+	- Once the row address is latched and the row decoder is enabled, the row remains selected while the column address is processed. This allows for faster and more efficient access to memory cells within the same row, as only the column address needs to be changed for accessing different cells within that row.
+	- This technique is particularly useful for burst mode operations, where multiple sequential memory accesses occur within the same row.
+	- ![[Pasted image 20241215141459.png]]
+	- **8-bit Address Input**: The 16-bit address is divided into two 8-bit addresses: one for the row and one for the column.
+	- **Row Address Strobe (RAS)**:
+	    - Initially, RAS is high (1 state).
+	    - The 8-bit row address is applied to the address inputs.
+	    - RAS is driven low (0 state), enabling the row register to store the row address.
+	    - The row decoder then decodes this address to select the corresponding row in the memory cell array.
+	    - After the row is selected, RAS returns to high (1 state).
+	- **Column Address Strobe (CAS)**:
+	    - After the row address is processed, the 8-bit column address is applied to the address inputs.
+	    - CAS is driven low (0 state), enabling the column register to store the column address.
+	    - The column decoder decodes this address to select the corresponding column in the memory cell array.
+	    - CAS returns to high (1 state) after the column is selected.
+	- **Memory Cell Array**:
+	    - The 256 x 256 memory cell array is accessed at the intersection of the selected row and column.
+	    - The read/write operation is then performed on the selected memory cell.
+	    - Data is inputted or outputted based on the operation (read or write).
+
+### Error Detection and Correction
+- The dynamic physical interaction of the electrical signals affecting the data path of a memory unit may cause occasional errors in storing and retrieving the binary information.
+- The most common error detection scheme is the parity bit.
+- **Hamming Code**
+	- In the Hamming code, k parity bits are added to an n-bit data word, forming a new word of n + k bits. The bit positions are numbered in sequence from 1 to n + k. Those positions numbered as a power of 2 are reserved for the parity bits.
+	- ![[Pasted image 20241215150651.png]]
+	- ![[Pasted image 20241215150710.png]]
+	- ![[Pasted image 20241215150726.png]]
+	- ![[Pasted image 20241215150843.png]]
+	- Thus, for no error, we have C = 0000; with an error in bit 1, we obtain C = 0001; and with an error in bit 5, we get C = 0101. When the binary number C is not equal to 0000, it gives the position of the bit in error.
+	- The error can be corrected by complementing the corresponding bit. Note that an error can occur in the data word or in one of the parity bits
+	- ![[Pasted image 20241215151040.png]]
+- Single-Error Correction, Double-Error Detection
+	- The Hamming code can detect and correct only a single error. By adding another parity bit to the coded word, the Hamming code can be used to correct a single error and detect double errors.
+	- **Extended Hamming Code with Additional Parity Bit**:
+		- To enable double-error detection, an additional parity bit (P13) is added to the coded word.
+		- This parity bit (P13) ensures even parity over the entire coded word.
+		- //
+			- Consider a 12-bit Hamming coded word: `001110010100`.
+			- Calculate P13 as the exclusive-OR of the 12 bits to maintain even parity.
+			- The 13-bit coded word might look like this: `0011100101001`.
+		- **Error Detection and Correction Process**:
+			- When the 13-bit coded word is read from memory, the check bits and the overall parity bit (P) are evaluated.
+			- If the overall parity bit P is 0, it indicates even parity. If P is 1, it indicates odd parity.
+			- ### Error Cases
+				The following four cases arise when checking the 13-bit word:
+				1. **Case 1: C = 0 and P = 0**
+				    - No error occurred. Both the check bits and the overall parity are correct.
+				2. **Case 2: C ≠ 0 and P = 1**
+				    - A single error occurred. The error can be corrected using the original Hamming code logic.
+				3. **Case 3: C ≠ 0 and P = 0**
+				    - A double error occurred. The overall parity is correct, but the check bits indicate an error. Double errors are detected but cannot be corrected.
+				4. **Case 4: C = 0 and P = 1**
+				    - An error occurred in the parity bit P13 itself.
+		- ![[Pasted image 20241215151825.png]]
+
+![[Pasted image 20250112180009.png]]
+![[Pasted image 20250112180023.png]]
+### Read Only Memory
+- A read-only memory (ROM) is essentially a memory device in which permanent binary information is stored. The binary information must be specified by the designer and is then embedded in the unit to form the required interconnection pattern. Once the pat tern is established, it stays within the unit even when power is turned off and on again.
+- A block diagram of a ROM consisting of k inputs and n output .The inputs provide the address for memory, and the outputs give the data bits of the stored word that is selected by the address. The number of words in a ROM is determined from the fact that k address input lines are needed to specify 2k words.
+- a ROM does not have data inputs, because it does not have a write operation.
+- ![[Pasted image 20241215152753.png]]
+- Internal Logic Construction of a 32 × 8 ROM
+	- A 32 × 8 Read-Only Memory (ROM) consists of 32 words, each 8 bits in length
+	- **Inputs and Addressing**:
+		- The ROM has 5 input lines that form binary numbers ranging from 0 to 31, which are used as addresses for the memory locations.
+		- These 5 input lines are fed into a 5 × 32 decoder.
+	- **Decoder**:
+		- The 5 × 32 decoder translates the 5-bit binary address into one of 32 distinct output lines.
+		- Each output line corresponds to one of the 32 memory addresses, enabling the selection of a specific word.
+	- **OR Gates**:
+		- The ROM includes 8 OR gates, each corresponding to one bit of the 8-bit word.
+		- Each OR gate has 32 inputs, one for each output line of the decoder.
+		- Therefore, each output line of the decoder is connected to one input of each of the 8 OR gates.
+	- **Array Logic Convention**:
+		- The diagram uses the array logic convention to represent the complex circuit.
+		- In this convention, the connections between the decoder outputs and the OR gates are depicted as a matrix.
+		- Each cell in the matrix indicates a potential connection between a decoder output and an OR gate input.
+	- **Internal Connections**:
+		- Since each OR gate has 32 inputs and there are 8 OR gates, the ROM contains a total of 32 × 8 = 256 internal connections.
+		- These connections link the decoder outputs to the inputs of the OR gates, forming the complete logic array.
+	- **General Case**:
+		- For a general 2^k × n ROM, there is a k × 2^k decoder and n OR gates.
+		- Each OR gate in this case has 2^k inputs, connected to the outputs of the decoder.
+- Programmable Crosspoint Intersections in ROM
+	- the 256 internal connections (or intersections) between the decoder outputs and the OR gate inputs are **programmable**. This programmability allows for flexible configuration of the connections, making it possible to "program" the ROM to store specific data by connecting or disconnecting certain lines at these intersections.
+	- Programmable Crosspoints
+		- **Definition**: A **crosspoint** is the intersection between two lines, such as a decoder output line and an OR gate input line. The state of the crosspoint can either be closed (connected) or open (disconnected).
+		- **Functionality**: The closed state means the two lines are connected, allowing data to flow between them. An open state means the lines are disconnected, preventing data from being passed through.
+	- Implementing Crosspoints with Physical Devices
+		- Several physical devices can be used to implement these programmable crosspoints. One of the simplest and most common methods is to use **fuses**:
+		- **Fuses in Programmable ROM**:
+			- In this method, each crosspoint is initially connected by a fuse. The fuse forms a closed circuit, allowing the two lines (decoder output and OR gate input) to be connected.
+			- **Blowing the Fuse**: A fuse can be "blown" (i.e., opened) by applying a high-voltage pulse to it. This pulse effectively disconnects the two lines, making the connection open.
+			- Once a fuse is blown, the lines are no longer connected at that crosspoint, which alters the logic and the stored data.
+	- **Permanent Configuration**: Once the fuses are blown, the configuration is permanent. This non-volatile aspect is ideal for ROMs, where the stored data should not change unless a full reprogramming occurs.
+	- ![[Pasted image 20241215153953.png]]
+	- ![[Pasted image 20241215154003.png]]
+- ROM as a Minterm Generator and Combinational Circuit
+	- A **ROM (Read-Only Memory)** can be viewed in two key ways:
+		- As a **memory unit** storing a fixed pattern of words.
+		- As a **combinational circuit** that implements Boolean functions using the stored words.
+	- ROM as a Minterm Generator
+		- In a ROM, the **internal logic** consists of a **decoder** and **OR gates** that work together to form a **minterm generator**. A **minterm** is a product term in Boolean algebra that represents a specific combination of input variables. By selecting the appropriate **connections** (crosspoints) in the ROM, the outputs can be programmed to represent various Boolean functions.
+		- **Minterms and the ROM Structure**:
+			- A ROM has a set of **input lines** (address lines) that are decoded into distinct outputs.
+			- The ROM's internal array of **OR gates** generates **minterms** by connecting the decoder outputs to the inputs of the OR gates.
+			- Each OR gate is capable of generating a specific minterm by combining the decoded address with a fixed pattern stored in the ROM.
+		- By **programming** the ROM with specific connections, it becomes possible to implement a Boolean function, where each output can be seen as a sum of minterms.
+		- ![[Pasted image 20241215155133.png]]
+		- for example, consider the output A7A_7A7​ of a 32 × 8 ROM with five input variables (I4,I3,I2,I1,I0I_4, I_3, I_2, I_1, I_0I4​,I3​,I2​,I1​,I0​):
+			A7(I4,I3,I2,I1,I0)=Σ(0,2,3,29)A_7(I_4, I_3, I_2, I_1, I_0) = Σ(0, 2, 3, 29)A7​(I4​,I3​,I2​,I1​,I0​)=Σ(0,2,3,29)
+			In this function:
+			- The sum Σ(0,2,3,29)Σ(0, 2, 3, 29)Σ(0,2,3,29) represents the minterms corresponding to the values 0, 2, 3, and 29.
+			- These values (0, 2, 3, and 29) are represented by specific combinations of the input variables.
+			- The ROM will output a **1** at A7A_7A7​ for these specific input combinations and **0** for others.	
+			The **crosspoints** in the ROM determine the minterms that are included in the sum. Each **connected crosspoint** generates a minterm, and the **OR gates** combine these minterms to produce the desired output. Any crosspoint marked with an asterisk (*) in the ROM diagram generates a minterm for the sum.f
+- Types of ROMs
+	- ROMs (Read-Only Memories) can be programmed in several different ways, depending on the desired flexibility, quantity, and cost.
+	- The four main programming methods are **mask programming**, **PROM (Programmable Read-Only Memory) programming**, and two others that are common in modern systems: **EPROM (Erasable Programmable ROM)** and **EEPROM (Electrically Erasable Programmable ROM)**.
+	- Mask Programming
+		- Mask programming is typically used for **large-volume manufacturing** of ROMs where the configuration needs to be fixed and customized for a specific purpose. Here's how it works:
+			- **Process**: The manufacturer fabricates the ROM chip based on a customer's specified truth table, which defines how the input addresses map to stored words. The truth table is provided by the customer, either in a specified format or on a computer medium.
+			- **Mask Creation**: Using the customer's truth table, the manufacturer creates a custom **mask** that defines the paths (connections and disconnections) for each bit in the ROM. This mask is used during the fabrication process to set up the ROM's internal connections.
+	- PROM (Programmable Read-Only Memory) Programming
+		- For **smaller quantities** or for users who want to program the ROM themselves, **PROM** is a more flexible and cost-effective option. Here's how PROM programming works:
+			- **Default State**: PROMs are delivered with all fuses intact, which means that all bits are initially set to 1 (the default "programmed" state).
+			- **Programming the PROM**: The user can program the PROM by applying a **high-voltage pulse** through a special pin. This pulse "blows" specific fuses, changing the state of those bits from 1 to 0.
+			- **Binary States**: A **blown fuse** represents a binary 0, and an **intact fuse** represents a binary 1. By selectively blowing fuses, the user can create the desired mapping of input addresses to stored data.
+			- **Programming Tools**: Special tools, called **PROM programmers**, are used to program the PROM. These devices apply the high-voltage pulses to blow the fuses in the correct pattern as per the user's desired truth table.
+			- **Flexibility**: While PROM programming allows customization of ROM contents by the user, the contents cannot be changed once the PROM is programmed. This makes it useful for situations where a specific configuration is needed, but the cost of mask programming is not justified.
+	- EPROM and EEPROM (Additional Programming Methods)
+		- **EPROM**: **Erasable Programmable ROMs** (EPROMs) are a more flexible type of ROM that can be erased and reprogrammed. EPROMs use ultraviolet (UV) light to erase the data, and the user can reprogram them multiple times. This makes EPROMs useful for applications where updates or changes to the data might be required after production.
+		- **EEPROM**: **Electrically Erasable Programmable ROMs** (EEPROMs) can be erased and reprogrammed using electrical signals, making them more convenient than EPROMs, which require UV light for erasure. EEPROMs are commonly used in situations where data needs to be updated frequently or even during operation.
+- Combinational PLDs
+	- PROM (Programmable Read-Only Memory)
+		- **Configuration**: The PROM is a **fixed AND array** and a **programmable OR array**. 
+	    - The **AND array** is typically implemented as a **decoder**, which generates the product terms (minterms) corresponding to the combinations of input variables.
+	    - The **OR array** is programmable, and it is used to implement the sum-of-minterms Boolean function by connecting specific AND products to the OR gates.
+	    - **Operation**: The PROM essentially provides a way to implement combinational logic in a **sum-of-minterms** format, where each output is a logical OR of certain product terms (AND of input variables). The OR gates are programmable to form the desired output based on the customer's truth table.
+	- **PAL (Programmable Array Logic)**
+		- **Configuration**: In contrast to the PROM, the **PAL** has a **programmable AND array** and a **fixed OR array**.
+			- The **AND array** is programmable, allowing users to define specific product terms (AND operations) based on input variables.
+			-  The **OR array** is fixed, meaning the product terms generated in the AND array are logically summed in a predefined way in the OR gates (usually one per output).
+		- **Operation**: The PAL is more flexible than the PROM because the AND array can be programmed to create different product terms, but the fixed OR array limits the ways in which these terms can be combined.
+	- PLA (Programmable Logic Array)
+		- **Configuration**: The **PLA** is the most flexible type of PLD, as it has both a **programmable AND array** and a **programmable OR array**.
+			- The **AND array** can generate product terms by ANDing various input variables. This can be done for any combination of input variables, providing greater flexibility in the design.
+			- The **OR array** is also programmable, meaning any of the product terms generated by the AND array can be logically summed in any of the OR gates to create the required output.
+			- **Operation**: The PLA allows for a full **sum-of-products** implementation. The flexibility of the PLA comes from the fact that both the product terms (AND) and the way those terms are combined (OR) can be tailored to meet the specific needs of the logic function.
+	- ![[Pasted image 20241215160646.png]]
+
+### Prorammable Logic Array
+- The PLA is similar in concept to the PROM, except that the PLA does not provide full decoding of the variables and does not generate all the minterms.
+- The decoder is replaced by an array of AND gates that can be programmed to generate any product term of the input variables.The product terms are then connected to OR gates to pro vide the sum of products for the required Boolean functions.
+- 
+- 
+

@@ -1,0 +1,25 @@
+### Verantwortlichkeiten eines Betriebssystems
+- **Prozessverwaltung**
+	- Erstellung und Terminierung von Prozessen
+	- Prozessscheduling
+	- Prozesswechsel
+- Speicherverwaltung
+	- **Zuteilung und Freigabe von Speicher**
+	- Virtueller Speicher
+	- Speicherschutz
+- Dateiverwaltung
+	- Dateisystemverwaltung
+	- Dateioperationen
+	- Zugriffsrechte und Sicherheit
+- Geräteverwaltung
+	- Gerätetreiber
+	- E/A-Steuerung
+- Benutzerschnittstelle
+	- Grafische Benutzeroberfläche (GUI)
+	- Kommandozeilenschnittstelle (CLI
+- Sicherheit und Schutz
+	- Authentifizierung und Autorisierung
+	- Datenschutz und Verschlüsselung
+	- Überwachung und Protokollierung
+- Netzwerkverwaltung
+- 

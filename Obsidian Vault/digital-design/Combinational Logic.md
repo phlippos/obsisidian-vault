@@ -1,0 +1,116 @@
+### Ripple Counters
+- A **counter** is a type of register that goes through a prescribed sequence of states based on input pulses, often associated with clock signals. Counters can follow various sequences of states, including binary counting, which is common in digital systems.
+- <mark style="background: #FFB86CA6;">Ripple Counter (asynchronous counter):</mark>
+	- A **ripple counter** is a type of counter where the clock pulses are applied to the first flip-flop, and the <mark style="background: #FF5582A6;">subsequent flip-flops are triggered by the output transition (or ripple) of the previous flip-flop.</mark>
+	- In other words, the output of one flip-flop triggers the clock input of the next flip-flop, which causes a "ripple" effect through the chain of flip-flops.
+- <mark style="background: #FFB86CA6;">Synchronous Counter</mark>
+	- In a **synchronous counter**, all the flip-flops <mark style="background: #FF5582A6;">receive the same clock signal</mark> simultaneously.
+	- more complex to design,as additional logic may be needed to ensure the correct operation of the counter, especially when working with a larger number of flip-flops.
+- 
+- <mark style="background: #FFB86CA6;">Binary Ripple Counter</mark>
+	- ![[Pasted image 20241214155802.png]]
+	- A binary ripple counter consists of a series of **flip-flops** connected in such a way that the output of each flip-flop is used to trigger the clock input of the next flip-flop. This means that the flip-flops toggle in a "ripple" fashion, starting with the least significant bit (LSB).
+	- <mark style="background: #BBFABBA6;"> Types of Flip-Flops Used in a Binary Ripple Counter</mark>
+		- **T Flip-Flop**: In a T flip-flop, the T input determines whether the flip-flop will toggle or not. If T is set to 1, the flip-flop toggles with each clock pulse.
+		- **D Flip-Flop**: A D flip-flop can be used by connecting the D input to the complement of the current output. This ensures that the flip-flop always toggles with every clock pulse.
+		- **JK Flip-Flop**: If a JK flip-flop is used, the J and K inputs can be tied together, and this combination also makes the flip-flop toggle on every clock pulse.
+	- #### **Example: Counting from 0011 (binary 3) to 0100 (binary 4)**:
+		- The current state is **0011**:
+		    - **A0** is the least significant bit (LSB), and it toggles with every count pulse.
+			-  **A1** toggles when **A0** changes from 1 to 0.
+		    - **A2** toggles when **A1** changes from 1 to 0.
+		    - **A3** toggles when **A2** changes from 1 to 0
+		    - ![[Pasted image 20241214160124.png]]
+- <mark style="background: #FFB86CA6;">  Binary Coded Decimal</mark>
+	- **BCD (Binary Coded Decimal) ripple counter** is a type of ripple counter that counts in decimal digits (0 to 9) using binary representations, specifically Binary Coded Decimal (BCD). A BCD counter uses a combination of binary counting and logic to ensure that the count only progresses from **0000 (0)** to **1001 (9)**. After reaching 9, it resets back to 0000 (0) and repeats the cycle.
+	- ![[Pasted image 20241214160507.png]]
+	- ![[Pasted image 20241214162819.png]]
+	- The four outputs are designated by the letter symbol Q, with a numeric subscript equal to the binary weight of the corresponding bit in the BCD code. Note that the output of Q1 is applied to the C inputs of both Q2 and Q8 and the output of Q2 is applied to the C input of Q4. The J and K inputs are connected either to a permanent 1 signal or to outputs of other flip-flops.
+### Synchronous Counter
+- Synchronous counters are different from ripple counters in that clock pulses are applied to the inputs of all flip-flops. A common clock triggers all flip-flops simultaneously, rather than one at a time in succession as in a ripple counter.
+- <mark style="background: #FFB86CA6;">Binary Counter </mark>
+	- #### **Key Concepts of Synchronous Binary Counters:**
+
+	1. **Simultaneous Triggering:**
+	    - All flip-flops receive the clock pulse simultaneously, ensuring that they all update their states at the same time.
+	2. **Complementation Condition:**
+	    - The flip-flop in the least significant bit (LSB) position (A0) toggles with every clock pulse.
+	    - A flip-flop in any other position (An) toggles only if all the lower significant bits (A[n-1]...A0) are set to 1.
+	3. **Operation:**
+		- **A0** (the least significant bit) is complemented with every clock pulse.
+		- **A1** is complemented if A0 is 1.
+		- **A2** is complemented if A1 and A0 are both 1.
+		- **A3** is complemented if A2, A1, and A0 are all 1, and so on for higher-order bits.
+	- Up–Down Binary Counter
+		- A synchronous countdown binary counter goes through the binary states in reverse order, from 1111 down to 0000 and back to 1111 to repeat the count. It is possible to design a countdown counter in the usual manner, but the result is predictable by inspection of the downward binary count. The bit in the least significant position is complemented with each pulse. A bit in any other position is complemented if all lower significant bits are equal to 0. For example, the next state after the present state of 0100 is 0011. The least significant bit is always complemented. The second significant bit is complemented because the first bit is 0. The third significant bit is complemented because the first two bits are equal to 0. But the fourth bit does not change, because not all lower significant bits are equal to 0.
+		- ![[Pasted image 20241214164305.png]]
+		- ![[Pasted image 20241214164604.png]]
+		- . When the up input is 1, the circuit counts up, since the T inputs receive their signals from the values of the previous normal outputs of the flip-flops. When the down input is 1 and the up input is 0, the circuit counts down, since the complemented outputs of the previous flip-flops are applied to the T inputs. When the up and down inputs are both 0, the circuit does not change state and remains in the same count. When the up and down inputs are both 1, the circuit counts up. This set of conditions ensures that only one operation is performed at any given time. Note that the up input has priority over the down input
+	- BCD Counter
+		- A BCD counter counts in binary-coded decimal from 0000 to 1001 and back to 0000. Because of the return to 0 after a count of 9, a BCD counter does not have a regular pat tern, unlike a straight binary count.To derive the circuit of a BCD synchronous counter, it is necessary to go through a sequential circuit design procedure.
+		- ![[Pasted image 20241214165030.png]]
+		- ![[Pasted image 20241214165312.png]]
+	- ### Binary Counter with Parallel Load
+		- Digital systems often need counters that can load an initial binary number into the counter before counting starts. This is achieved using parallel-load capability.
+		- - **Load Input:** When set to 1, the counter is disabled, and data from the four inputs (I0-I3) are loaded into the flip-flops.
+		- **Count Input:** When set to 1 and Load is 0, the counter increments on each clock pulse.
+		- **Both Load and Count 0:** The state of the register remains unchanged regardless of clock pulses.
+		-  **Clear_b:** Active low and asynchronous. When 0, it clears the counter immediately, regardless of other inputs.
+	    - **CLK:** The clock signal driving the flip-flops.
+	    - **Load:** Enables parallel loading of data into the flip-flops.
+	    - **Count:** Controls the counting operation when Load is 0.
+	    - ![[Pasted image 20241214165759.png]]
+	    - ![[Pasted image 20241214165820.png]]
+### Other Counters
+- Counters with unused States
+	- A sequential circuit with n flip-flops can theoretically have 2^n binary states.
+	- Sometimes, the circuit requires fewer than these maximum possible states, leaving some states unused.
+	- Handling Unused States:
+		- Design Considerations:
+			- **State Table:** Only the states that are needed for the circuit's operation are listed in the state table. Unused states are not included.
+			- **Don't-Care Conditions:** In simplifying input equations, the unused states can be treated as don't-care conditions. This can simplify the design process and reduce the complexity of the circuit.
+		- Outside Interference:
+			- During operation, external interference can potentially cause the circuit to enter an unused state. This scenario necessitates careful planning to ensure the circuit can recover.
+		- Ensuring Normal Operation
+			- It is crucial to ensure that if the circuit enters an unused state, it must eventually transition to a valid state and resume normal operation.
+			- Without this provision, the circuit might circulate among unused states indefinitely, disrupting the intended sequence of state transitions.
+	- Approaches to Handle Unused States:
+		- **Don't-Care Conditions:**
+			- Treating unused states as don't-care conditions during the design can simplify the circuit.
+			- **Post-Design Analysis:** After the circuit is designed, it is essential to analyze it to understand the behavior of the next states from the unused states.
+		- Assigned Specific Next States:
+			- Assigning specific next states to the unused states ensures that the circuit transitions to a valid state if it inadvertently enters an unused state.
+	- ![[Pasted image 20241214171800.png]]
+	- The logic diagram of the counter is shown in Fig. 6.16(a). Since there are two unused states, we analyze the circuit to determine their effect. If the circuit happens to be in state 011 because of an error signal, the circuit goes to state 100 after the application of a clock pulse. This action may be determined from an inspection of the logic diagram by noting that when B=1, the next clock edge complements A and clears C to 0, and when C=1, the next clock edge complements B. In a similar manner, we can evaluate the next state from present state 111 to be 000.
+	- ![[Pasted image 20241214172217.png]]
+- Ring Counter
+	- Timing signals that control the sequence of operations in a digital system can be generated using either:
+		- A shift register.
+		- A counter with a decoder.
+	- A ring counter is a type of circular shift register with a unique configuration.
+	- Characteristics:
+		- **Single Flip-Flop Set:** At any given time, only one flip-flop in the ring counter is set (i.e., has a value of 1), while all others are cleared (i.e., have a value of 0).
+		- **Bit Shifting:** The single bit of 1 is shifted from one flip-flop to the next with each clock pulse, creating a sequence of timing signals.
+	- Four-Bit Shift Register as a Ring Counter:
+		- **Configuration:** The example shows a four-bit shift register set up as an 8-4-2-1 ring counter.
+		- **Initial Value:** The register starts with the value 1000. This requires using Preset/Clear flip-flops to set the initial state.
+		- ![[Pasted image 20241214172545.png]]
+		- ![[Pasted image 20241214172552.png]]
+- Johnson Counter
+	- A **Johnson counter**, also known as a **switch-tail ring counter**, is a type of shift register that doubles the number of distinguishable states compared to a standard ring counter.
+	- Standard Ring Counter:
+		- A kkk-bit ring counter circulates a single bit among kkk flip-flops, providing kkk states.
+	- Switch-Tail Ring Counter:
+		- **Extended States:** The number of states is doubled by connecting the complemented output of the last flip-flop to the input of the first flip-flop.
+		- **Example Configuration:**
+			- **Circular Connection:** The output of the rightmost flip-flop (E) is complemented and fed into the input of the leftmost flip-flop (A).
+			- **Shift Operation:** With every clock pulse, the register shifts its contents right, and the complemented value of the E flip-flop is transferred into the A flip-flop.
+			- ![[Pasted image 20241214173354.png]]
+			- - **Initial State:** Starting from all 0s.
+			- **State Transition:**
+			    - Each shift inserts 1s from the left until the register is filled with all 1s.
+			    - Subsequent shifts insert 0s from the left until the register returns to all 0s.
+			- A Johnson counter is a k-bit switch-tail ring counter with 2k decoding gates to pro vide outputs for 2k timing signals. The decoding gates are not shown in Fig. 6.18, but are specified in the last column of the table. The eight AND gates listed in the table, when connected to the circuit, will complete the construction of the Johnson counter.
+			- One disadvantage of the circuit in Fig. 6.18(a) is that if it finds itself in an unused state, it will persist in moving from one invalid state to another and never find its way to a valid state. The difficulty can be corrected by modifying the circuit to avoid this undesirable condition. One correcting procedure is to disconnect the output from flip flop B that goes to the D input of flip-flop C and instead enable the input of flip-flop C by the function
+			- ![[Pasted image 20241214174129.png]]
+			- where DC is the flip-flop input equation for the D input of flip-flop C. Johnson counters can be constructed for any number of timing sequences. The num ber of flip-flops needed is one-half the number of timing signals. The number of decod ing gates is equal to the number of timing signals, and only two-input gates are needed

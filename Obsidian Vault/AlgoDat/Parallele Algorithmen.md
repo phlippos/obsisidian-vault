@@ -1,0 +1,21 @@
+## Parallel random access machine
+- Machine mit p Prozessoren, die alle Schreib- und Leserechte auf einem gemeinsamen Speicher haben. Und alle Prozessoren verfügen über eigene private Arbeitsspeicher.
+- Concurrency: 
+	- Das ein Programm in Bezug auf mehr als eine Aufgabe vorankommt, scheinbar gleichzeitig.
+- Problem auf mehrere Computer verteilen.
+- Neue Probleme 
+	- Gemeinsamer Speicher
+	- Nachrichtenaustausch
+- Big Data = Millarden von Zeilen in eine Tabelle. SQL Abfrage wird sehr lange dauern.
+## MapReduce
+- MapReduce ist ein Programmiermodell und ein zugehöriges Implementierungsmodell, das für die Verarbeitung und Generierung großer Datensätze entwickelt wurde.
+- Map Phase
+	- Input Splitting : Der Eingabedatensatz wird in kleinere Blöcke oder Splits aufgeteilt. Jeder Split wird von einem seperaten Mapper bearbeitet.
+	- Mapping : Jeder Mapper nimmt einen Split des Eingabedatensatzes und wandelt ihn in eine Reihe von Schlüssel-Wert-Paaren um. Der Mapper wendet eine Funktion auf jeden EingabeDatensatz an und generiert dadurch Zwischen Schlüssel Wert Paare.
+- Shuffle and Sort Phase
+	- Shuffling: Die Zwischen-Schlüssel-Wert-Paare werden sortiert und nach Schlüsselwerte gruppiert. Paare mit dem gleichen Schlüssel werden zusammengeführt.
+	- Partitioning: Die Daten werden nach Schlüsseln in verschiedene Reduzierer aufgeteilt. Jeder Reduzierer erhält alle Schlüssel-Wert-Paare mit einem bestimmten Schlüssel oder einer Gruppe von Schlüsseln.
+- Reduce Phase
+	- Reducing: Jeder Reduzierer nimmt die gruppierten Schlüssel-Wert-Paare und wendet eine Reduzierfunktion auf sie an, um eine endgültige Ausgabe zu erzeugen. Diese Reduzierfunktion aggregiert oder kombiniert die Werte zu einem einzigen Ergebnis.
+	- Output: Die endgültigen Sclüssel-Wert-paare, die von den Reduzierern erzeugt wurden, werden als Endausgabe gesğeichert.
+- ![[Pasted image 20240601143058.png]]

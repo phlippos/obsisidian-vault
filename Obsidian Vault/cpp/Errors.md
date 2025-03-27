@@ -1,0 +1,2 @@
+error: member reference type 'User *' is a pointer; did you mean to use '->'?
+`User` sınıfına ait bir gösterici üzerinden üye fonksiyonlara veya üyelere erişmek için `.` (nokta) operatörü yerine `->` (ok) operatörünü kullanmanız gerekir.

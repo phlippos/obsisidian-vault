@@ -1,0 +1,370 @@
+{
+  "main": {
+    "id": "24e6fffb56dab0ea",
+    "type": "split",
+    "children": [
+      {
+        "id": "8fa82d20900396c3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e12695fc0f20afb3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NN/RNN.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "RNN"
+            }
+          },
+          {
+            "id": "250447f48a1c0337",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AlgoDat/String Algorithmen-3.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "String Algorithmen-3"
+            }
+          },
+          {
+            "id": "0e977cf6e74b04fd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Embedded/IPC.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "IPC"
+            }
+          },
+          {
+            "id": "7fe2cbc27a0401b9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Roadmap - Mekanik.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Roadmap - Mekanik"
+            }
+          },
+          {
+            "id": "5dbe3e6bc4edfef2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled 1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 1"
+            }
+          },
+          {
+            "id": "db2e8b5e5051bfe7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Software Engineering/Projektmanagement.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Projektmanagement"
+            }
+          },
+          {
+            "id": "51d6c2361c6855f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Software Engineering/Design pattern.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Design pattern"
+            }
+          },
+          {
+            "id": "5730809c33458ca6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "digital-design/Memory and Programmable Logic.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Memory and Programmable Logic"
+            }
+          },
+          {
+            "id": "a55aa9a2707189a1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Embedded/microcontroller/1-Intro.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1-Intro"
+            }
+          },
+          {
+            "id": "d993e4dfa3f79b81",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Embedded/microcontroller/3-Digital IOs.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "3-Digital IOs"
+            }
+          },
+          {
+            "id": "86c03416b35b0864",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Embedded/microcontroller/1-Intro.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1-Intro"
+            }
+          }
+        ],
+        "currentTab": 10
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c9db0bca5745c6e2",
+    "type": "split",
+    "children": [
+      {
+        "id": "6a7fe73e95a73672",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a1885ad4b51fe680",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "d21bec855ef779f7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "ab73489017da54e5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 312.5
+  },
+  "right": {
+    "id": "2ca7c61a65b43ea3",
+    "type": "split",
+    "children": [
+      {
+        "id": "b211d130be5db44a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "055470f997357917",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "cpp/Introduction to the compiler, linker, and libraries.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Introduction to the compiler, linker, and libraries"
+            }
+          },
+          {
+            "id": "ed3719b9a52bb8ff",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "cpp/Introduction to the compiler, linker, and libraries.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Introduction to the compiler, linker, and libraries"
+            }
+          },
+          {
+            "id": "91fd790735859f83",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "61dbc1010e20be41",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "cpp/Introduction to the compiler, linker, and libraries.md"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Introduction to the compiler, linker, and libraries"
+            }
+          },
+          {
+            "id": "2e7c83bee3ea1d1a",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "86c03416b35b0864",
+  "lastOpenFiles": [
+    "Embedded/microcontroller/4-Timer.md",
+    "Embedded/microcontroller/5-Serielle Schnittstellen.md",
+    "Pasted image 20250326135210.png",
+    "Pasted image 20250326134229.png",
+    "Pasted image 20250326134207.png",
+    "Pasted image 20250326134047.png",
+    "Pasted image 20250326133829.png",
+    "Pasted image 20250326133757.png",
+    "Pasted image 20250326133724.png",
+    "Pasted image 20250326131132.png",
+    "Pasted image 20250326130932.png",
+    "Pasted image 20250326130529.png",
+    "machine learning/konuşma.md",
+    "machine learning/decision trees.md",
+    "machine learning/Naive Bayes.md",
+    "Embedded/microcontroller/2-MSP430F5529.md",
+    "machine learning",
+    "Embedded/microcontroller/3-Digital IOs.md",
+    "digital-design/Memory and Programmable Logic.md",
+    "digital-design/Design at the Register Transfer level.md",
+    "digital-design/Combinational Logic.md",
+    "Embedded/microcontroller/1-Intro.md",
+    "eng/final.md",
+    "Embedded/Threads & Processes.md",
+    "Embedded/Socket.md",
+    "Embedded/mmap.md",
+    "Embedded/Memory.md",
+    "Embedded/IPC.md",
+    "Embedded/Introducing the mbed.md",
+    "Embedded/em1.md",
+    "Embedded/em2.md",
+    "Embedded/Digital Input and Output.md",
+    "power/first law.md",
+    "Embedded/microcontroller",
+    "power",
+    "Methoden der Datenanalyse/final.md",
+    "Methoden der Datenanalyse",
+    "Software Engineering/Design pattern.md",
+    "Software Engineering/Verhaltensdiagramme.md",
+    "Software Engineering/Anforderungsanalyse.md",
+    "digital-design",
+    "Untitled 2.canvas",
+    "cpp",
+    "Quizhoot",
+    "Untitled.canvas",
+    "Untitled 1.canvas",
+    "RL/Untitled",
+    "RL",
+    "eng",
+    "AlgoDat/Untitled.canvas"
+  ]
+}
