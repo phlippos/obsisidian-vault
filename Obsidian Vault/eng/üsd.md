@@ -30,34 +30,61 @@
 **Hard-working, Industrious (Çalışkan)** – _She is a hard-working/industrious student._ → O çalışkan bir öğrenci.
 
 
-- ambiguous → clear (Synonym: net, Turkish: açık) Example: The instructions were clear and left no room for misinterpretation.
-- awkward → graceful (Turkish: zarif) Example: The ballerina was graceful as she performed the difficult routine.
-- clumsy → agile (Turkish: çevik) Example: The athlete's agile movements impressed the judges.
-- beneficial → worthless (Turkish: değersiz) Example: The advice he gave was completely worthless for solving our problem.
-- exact → approximate (Turkish: yaklaşık) Example: We need an approximate estimate of the project costs by tomorrow.
-- guilty → innocent (Turkish: masum) Example: After reviewing the evidence, the jury found him innocent of all charges.
-- odd → commonplace (Turkish: sıradan) Example: Such behavior is commonplace among teenagers these days.
-- plentiful → scarce (Turkish: kıt) Example: Fresh water is becoming scarce in many regions of the world.
-- rigid → flexible (Turkish: esnek) Example: The company has a flexible work policy that allows remote working.
-- slight → considerable (Turkish: önemli) Example: There's been a considerable improvement in her performance this year.
-- sophisticated → crude (Turkish: kaba) Example: His crude remarks offended everyone at the dinner party.
-- strong → negligible (Turkish: önemsiz) Example: The impact of the policy change was negligible on overall performance.
-- bright → dim (Turkish: loş) Example: The dim lighting in the restaurant created a romantic atmosphere.
-- voluntary → compulsory (Turkish: zorunlu) Example: Attendance at the meeting is compulsory for all staff members.
-- willing → reluctant (Turkish: isteksiz) Example: He was reluctant to share his ideas during the brainstorming session.
-- modern → archaic (Turkish: eskimiş) Example: These archaic methods of farming are no longer practical.
-- pointless → worthwhile (Turkish: değerli) Example: The community project proved to be a worthwhile investment of time.
-- stagnant → vibrant (Turkish: canlı) Example: The city has a vibrant culture with numerous festivals throughout the year.
-- interesting → tedious (Turkish: sıkıcı) Example: The lecture was so tedious that several students fell asleep.
-- planned → spontaneous (Turkish: kendiliğinden) Example: Our spontaneous road trip turned out to be the highlight of summer.
-- simple → intricate (Turkish: karmaşık) Example: The intricate design of the tapestry took years to complete.
-- priceless → artificial (Turkish: yapay) Example: The artificial diamonds looked genuine but cost much less.
-- profound → delicate (Turkish: hassas) Example: The situation requires delicate handling to avoid upsetting anyone.
-- impossible → feasible (Turkish: uygulanabilir) Example: With additional funding, the project is entirely feasible.
-- rare → even (Turkish: olağan) Example: It's even to find teenagers without smartphones these days.
-- simple → problematic (Turkish: sorunlu) Example: The problematic relationship between the two countries has deteriorated further.
-- rough → smooth (Turkish: pürüzsüz) Example: The smooth operation of the new system exceeded our expectations.
-- natural → artificial (Turkish: yapay) Example: The artificial sweetener is used as a sugar substitute in many products.
+- **ambiguous** – belirsiz
+- **clear** – açık, net
+- **awkward** – beceriksiz
+- **graceful** – zarif
+- **clumsy** – sakar, beceriksiz
+- **agile** – çevik
+- **beneficial** – faydalı
+- **worthless** – değersiz
+- **exact** – tam, kesin
+- **approximate** – yaklaşık
+- **guilty** – suçlu
+- **innocent** – masum
+- **odd** – garip
+- **commonplace** – sıradan
+- **plentiful** – bol
+- **scarce** – kıt
+- **rigid** – katı
+- **flexible** – esnek
+- **slight** – hafif
+- **considerable** – önemli
+- **sophisticated** – sofistike, gelişmiş
+- **crude** – kaba
+- **strong** – güçlü
+- **negligible** – önemsiz
+- **bright** – parlak
+- **dim** – loş
+- **voluntary** – gönüllü
+- **compulsory** – zorunlu
+- **willing** – istekli
+- **reluctant** – isteksiz
+- **modern** – modern
+- **archaic** – eskimiş
+- **pointless** – amaçsız, anlamsız
+- **worthwhile** – değerli
+- **stagnant** – durgun
+- **vibrant** – canlı
+- **interesting** – ilginç
+- **tedious** – sıkıcı
+- **planned** – planlı
+- **spontaneous** – kendiliğinden
+- **simple** – basit
+- **intricate** – karmaşık
+- **priceless** – paha biçilemez
+- **artificial** – yapay
+- **profound** – derin
+- **delicate** – hassas
+- **impossible** – imkânsız
+- **feasible** – uygulanabilir
+- **rare** – nadir
+- **even** – olağan (not the usual meaning of “even,” but fits contextually)
+- **problematic** – sorunlu
+- **rough** – pürüzlü
+- **smooth** – pürüzsüz
+- **natural** – doğal
+- **animosity** – düşmanlık
 - **Animosity (Düşmanlık)** – _There was clear animosity between the two teams._ → İki takım arasında açık bir düşmanlık vardı.
 
 **Engage (Dahil olmak)** – _Try to engage in the group discussion._ → Grup tartışmasına katılmaya çalış.  
