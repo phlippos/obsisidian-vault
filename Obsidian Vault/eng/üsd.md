@@ -346,3 +346,11 @@ f) **Following certain expressions**:
 - After verbs like "command", "insist", "suggest"
 - After adjectives like "vital", "essential", "necessary", "anxious"
 - _Example_: "I'm anxious that he should feel at home."
+
+
+
+![[Pasted image 20250408223311.png]]
+![[Pasted image 20250408223321.png]]
+![[Pasted image 20250408223329.png]]
+![[Pasted image 20250408223339.png]]
+![[Pasted image 20250408223346.png]]
