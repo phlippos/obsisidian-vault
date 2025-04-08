@@ -4,7 +4,7 @@
   "textFontFamily": "Times New Roman",
   "interfaceFontFamily": "Times New Roman",
   "monospaceFontFamily": "FreeMono",
-  "baseFontSize": 18,
+  "baseFontSize": 19,
   "nativeMenus": true,
   "theme": "obsidian",
   "baseFontSizeAction": true

@@ -500,6 +500,13 @@ To classify a new instance using the rule set:
 2. If multiple rules match, use a conflict resolution strategy (e.g., the most accurate rule, majority vote)
 3. If no rules match, use a default rule (e.g., the majority class)
 
+![[Pasted image 20250329180851.png]]
+![[Pasted image 20250329180859.png]]
+![[Pasted image 20250329180910.png]]
+![[Pasted image 20250329180919.png]]
+
+
+
 ## 14. Strengths and Weaknesses of Decision Trees
 
 ### 14.1 Strengths
