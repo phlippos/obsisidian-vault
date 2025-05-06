@@ -292,8 +292,8 @@ The document also includes practice exercises requiring students to fill in blan
 
 ## Past Forms Comparison
 
-- **Didn't need to do** / **Didn't have to do**: Something wasn't done because it wasn't necessary
-- **Needn't have done**: Something was done, but it wasn't necessary (implying the action was unnecessary in retrospect)
+- **Didn't need to do** / **Didn't have to do**: Something wasn't done because it wasn't necessary(yapmana gerek yok)
+- **Needn't have done**: Something was done, but it wasn't necessary (implying the action was unnecessary in retrospect) (yapmana gerek yoktu)
 
 ## Additional Examples
 

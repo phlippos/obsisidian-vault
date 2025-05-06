@@ -291,20 +291,20 @@ Die roten und blauen Linien mit Pfeilen verdeutlichen den Zusammenhang zwischen:
 ### Timer_A
 - In fast allen MSP430-Controllern vorhanden
 - 16-bit Timer/Counter
-- Bis zu 7 Capture/Compare-Register
-- Feste Timerlänge (immer 16-bit)
+- <mark style="background: #FFB86CA6;">Bis zu 7 Capture/Compare-Register</mark>
+- <mark style="background: #FFB86CA6;">Feste Timerlänge (immer 16-bit)</mark>
 - Grundlegende Timer-Funktionalität
 ### Timer_B
 - Nicht in allen MSP430-Controllern verfügbar
 - 16-bit Timer/Counter
-- Mehrere unabhängige Timer (TB0, TB1, TB2, TB3)
+- <mark style="background: #FFB86CA6;">Mehrere unabhängige Timer</mark> (TB0, TB1, TB2, TB3)
 - Variable Anzahl an Capture/Compare-Registern pro Timer
     - TB0, TB1, TB2: je 3 Register (Timer0_B3, Timer1_B3, Timer2_B3)
     - TB3: 7 Register (Timer3_B7)
 - Aktueller Timerstand in TBxR
-- Maximale Länge ebenfalls 16 bit
+- <mark style="background: #FFB86CA6;">Maximale Länge ebenfalls 16 bit</mark>
 ### Timer_D
-- Nur in wenigen spezialisierten MSP430-Modellen verfügbar
+- Nur <mark style="background: #FFB86CA6;">in wenigen spezialisierten MSP430-Modellen verfügbar</mark>
 - 16-bit Timer mit mehreren Capture/Compare-Registern
 - Bietet zusätzliche Funktionen:
     - High-Resolution Mode

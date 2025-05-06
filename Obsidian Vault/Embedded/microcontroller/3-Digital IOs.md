@@ -200,8 +200,8 @@ if(GET_BIT(P1IN, BIT3))       // Prüfen, ob P1.3 High ist
 
 ### Welches Problem kann bei unbenutzten I/Os entstehen?
 - Bei unbenutzten I/Os (Input/Output-Pins) können verschiedene Probleme auftreten, insbesondere bei Mikrocontrollern wie dem MSP430:
-	- **Schwebende Eingänge (Floating Inputs)**: Wenn ein Pin als Eingang konfiguriert ist, aber nicht angeschlossen wird, kann sein Zustand undefiniert sein. Dies führt zu:
-		- Zufälligen Zustandswechseln
+	- **Schwebende Eingänge (Floating Inputs)**:<mark style="background: #FFB86CA6;"> Wenn ein Pin als Eingang konfiguriert ist, aber nicht angeschlossen wird, kann sein Zustand undefiniert sein.</mark> Dies führt zu:
+		- <mark style="background: #FFB86CA6;"> Zufälligen Zustandswechseln</mark>
 		- Erhöhtem Stromverbrauch durch ungewollte Schaltvorgänge in der Eingangsstufe
 		- Möglichen Fehlinterpretationen bei Interrupts oder Abfragen
 	- **Erhöhter Stromverbrauch**: Schwebende Eingänge können durch ständiges Umschalten zwischen High und Low die CMOS-Eingangsstufen in einen linearen Betriebsbereich bringen, was den Stromverbrauch deutlich erhöht.

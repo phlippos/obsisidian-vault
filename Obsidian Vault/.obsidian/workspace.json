@@ -153,16 +153,58 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "eng/üsd.md",
+                "file": "machine learning/decision trees.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "üsd"
+              "title": "decision trees"
+            }
+          },
+          {
+            "id": "511bb928cb579947",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "research questions.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "research questions"
+            }
+          },
+          {
+            "id": "5ec822aaaa10a586",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Embedded/microcontroller/5-Serielle Schnittstellen.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "5-Serielle Schnittstellen"
+            }
+          },
+          {
+            "id": "2f7c68e015cb3441",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "konuşma.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "konuşma"
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 13
       }
     ],
     "direction": "vertical"
@@ -235,7 +277,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "cpp/Introduction to the compiler, linker, and libraries.md",
+                "file": "Embedded/microcontroller/4-Timer.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -245,7 +287,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Introduction to the compiler, linker, and libraries"
+              "title": "Backlinks for 4-Timer"
             }
           },
           {
@@ -281,10 +323,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "cpp/Introduction to the compiler, linker, and libraries.md"
+                "file": "Embedded/microcontroller/4-Timer.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Introduction to the compiler, linker, and libraries"
+              "title": "Outline of 4-Timer"
             }
           },
           {
@@ -297,7 +342,8 @@
               "title": "Calendar"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -314,48 +360,48 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "86c03416b35b0864",
+  "active": "2f7c68e015cb3441",
   "lastOpenFiles": [
-    "Pasted image 20250408223346.png",
-    "Pasted image 20250408223339.png",
-    "Pasted image 20250408223329.png",
-    "Pasted image 20250408223321.png",
-    "Pasted image 20250408223311.png",
-    "Pasted image 20250408160425.png",
-    "Pasted image 20250408154147.png",
-    "Pasted image 20250408154136.png",
-    "Pasted image 20250408154130.png",
-    "Pasted image 20250408154111.png",
-    "Pasted image 20250408154102.png",
     "Embedded/microcontroller/5-Serielle Schnittstellen.md",
-    "eng/üsd.md",
-    "Untitled 1",
+    "konuşma.md",
+    "Pasted image 20250504163326.png",
+    "Pasted image 20250504163316.png",
+    "Pasted image 20250504163304.png",
+    "Pasted image 20250504163156.png",
+    "Pasted image 20250504161854.png",
+    "Pasted image 20250504161354.png",
+    "Pasted image 20250504161125.png",
+    "machine learning/K Nearest Neighbor.md",
+    "Pasted image 20250504140244.png",
+    "Pasted image 20250504135551.png",
+    "Pasted image 20250504135537.png",
+    "machine learning/Untitled.md",
+    "Methoden der Datenanalyse/final.md",
+    "machine learning/decision trees.md",
+    "research questions.md",
+    "machine learning/Naive Bayes.md",
     "Embedded/microcontroller/4-Timer.md",
     "Embedded/microcontroller/3-Digital IOs.md",
     "Embedded/microcontroller/2-MSP430F5529.md",
-    "machine learning/decision trees.md",
-    "machine learning/Untitled.md",
-    "machine learning/konuşma.md",
     "Embedded/microcontroller/1-Intro.md",
-    "machine learning/Naive Bayes.md",
-    "machine learning",
-    "digital-design/Memory and Programmable Logic.md",
-    "digital-design/Design at the Register Transfer level.md",
-    "digital-design/Combinational Logic.md",
-    "eng/final.md",
-    "Embedded/Threads & Processes.md",
-    "Embedded/Socket.md",
-    "Embedded/mmap.md",
-    "Embedded/Memory.md",
-    "Embedded/IPC.md",
-    "Embedded/Introducing the mbed.md",
-    "Embedded/em1.md",
-    "Embedded/em2.md",
-    "Embedded/Digital Input and Output.md",
+    "linux/File Operation.md",
+    "linux/Process.md",
+    "linux/systemctl.md",
+    "linux/scp.md",
+    "NN/CNN Architectures.md",
+    "NN/RNN.md",
     "power/first law.md",
+    "Quizhoot/Anforderungen.md",
+    "RL/1-The n-armed bandit problem.md",
+    "RL/2-Action-Value-Methods.md",
+    "RL/Reward Distribution.md",
+    "seren/mavlink.md",
+    "seren/Mavlink messaging.md",
+    "seren/Ros2.md",
+    "Untitled 1",
+    "machine learning",
     "Embedded/microcontroller",
     "power",
-    "Methoden der Datenanalyse/final.md",
     "Methoden der Datenanalyse",
     "digital-design",
     "Untitled 2.canvas",
