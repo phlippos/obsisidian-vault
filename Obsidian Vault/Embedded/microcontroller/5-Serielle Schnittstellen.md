@@ -603,3 +603,125 @@ Das Senden als SPI-Slave besteht darin, Daten in den Tx-Puffer zu legen und dann
 
 ## Empfangen von Daten als SPI-Slave
 Wenn ein Gerät als SPI-Slave konfiguriert ist, besteht das Empfangen von Daten darin, passiv zu warten, bis Daten in den Rx-Puffer geschoben wurden. Sobald ein vollständiger Datenrahmen eingetroffen ist, wird das RXFLG-Flag gesetzt. Als Slave ist dies die einzige Methode, die existiert, um anzuzeigen, dass Daten eingetroffen sind. Daher ist die Verwendung eines RXFLG-Interrupts, um den Empfang von Daten anzuzeigen, die effizienteste Möglichkeit, den SPI-Empfänger zu konfigurieren.
+
+
+
+## Inter-integrated Circuit (I2C) Bus
+
+- eine serielle Schnittstelle, die mit einer Zwei-Draht-Verbindung implementiert wird und mehrere Master sowie mehrere Slaves unterstützen kann.
+- Ein I²C-Bus enthält eine Taktleitung (SCL = serieller Takt) und eine Datenleitung (SDA = serielle Daten).
+- Eine I²C-Verbindung arbeitet immer im Halbduplex-Modus, was bedeutet, dass alle Geräte die Datenleitung gemeinsam nutzen, wobei jeweils nur ein Gerät zu einem bestimmten Zeitpunkt sendet.
+- ![[Pasted image 20250520013242.png]]
+- I2C Open-Drain Output Treiber: Erklärung:
+	- Der I²C-Bus verwendet ein "Open-Drain" Ausgangskonzept, das auf einem NMOS-Transistor (n-type Metal Oxide Semiconductor Field Effect Transistor) basiert. Dieser Transistor funktioniert als spannungsgesteuerter Schalter mit folgenden Eigenschaften:
+		- NMOS als Schalter:
+			- Wenn die Gate-Spannung (Steueranschluss) auf VCC liegt: Transistor schaltet EIN
+			- Wenn die Gate-Spannung auf GND (Masse) liegt: Transistor schaltet AUS
+			- Im EIN-Zustand: Leitungspfad zwischen Source und Drain (Schalter geschlossen)
+			- Im AUS-Zustand: Kein Leitungspfad zwischen Source und Drain (Schalter offen)
+	- Aufbau und Funktion
+		- In der Open-Drain Konfiguration:
+			- Der Drain-Anschluss des NMOS wird mit der Signalleitung verbunden
+			- Der Source-Anschluss wird mit GND (Masse) verbunden
+		- Mit dieser Anordnung kann der Ausgang:
+			- Die Signalleitung auf logisch LOW ziehen (durch Kurzschließen mit GND)
+			- Die Signalleitung aber NICHT aktiv auf logisch HIGH ziehen
+	- Pull-up Widerstand als Lösung
+		- Um die Leitung auf HIGH zu bringen, wird ein Pull-up Widerstand verwendet:
+			- Der Widerstand verbindet die Signalleitung mit VCC (Versorgungsspannung)
+			- Wenn der NMOS-Transistor AUS ist, zieht der Pull-up Widerstand die Leitung auf HIGH
+			- Wenn der NMOS-Transistor EIN ist, wird die Leitung auf LOW gezogen (der Pfad zur Masse hat einen geringeren Widerstand als der Pull-up Widerstand)
+	- Vorteile für den I²C-Bus
+		- Diese Konfiguration ermöglicht, dass mehrere Geräte dieselbe Signalleitung teilen können, ohne Konflikte zu erzeugen:
+			- Jedes Gerät kann die Leitung nur auf LOW ziehen, aber nicht aktiv auf HIGH
+			- Wenn ein Gerät LOW und ein anderes HIGH signalisieren möchte, gewinnt immer LOW (Wired-AND Logik)
+			- Diese Anordnung verhindert Kurzschlüsse und Beschädigungen, die entstehen würden, wenn Geräte direkt gegeneinander arbeiten würden
+## I²C Master-Slave-Konzept:
+- Der I²C-Bus verwendet das Konzept von Mastern und Slaves für die Kommunikation. Der Master ist das Gerät, das die Kommunikation initiiert und den Takt kontrolliert. Ein I²C-Bus unterstützt auch mehrere Master. Jeder Slave auf dem Bus hat eine eindeutige und vorbestimmte Adresse, die als Slave-Adresse bezeichnet wird. Diese Adresse wird vom Master verwendet, um anzuzeigen, mit welchem Slave er kommunizieren möchte. Einige I²C-Geräte haben eine fest einprogrammierte Slave-Adresse, die nicht geändert werden kann. Andere Geräte stellen möglicherweise einen Teil einer fest einprogrammierten Slave-Adresse bereit und erlauben dem Benutzer, Pull-up- oder Pull-down-Widerstände an Pins anzuschließen, um die restlichen Bits der Slave-Adresse festzulegen. Wenn der Bus im Ruhezustand ist, werden sowohl SDA als auch SCL durch die Pull-up-Widerstände auf HIGH gehalten, und kein I²C-Gerät versucht zu kommunizieren. Wenn Geräte den Bus steuern, gilt er als beschäftigt (busy).
+- I²C-Informationen werden in Nachrichten übertragen. Eine typische I²C-Nachricht beginnt mit einer START-Bedingung (S) und endet mit einer STOPP-Bedingung (P). Ein Master leitet eine neue Nachricht ein, indem er eine START-Bedingung (S) erzeugt, wobei SDA auf LOW gezogen wird, während SCL noch HIGH ist. Dies signalisiert jedem Gerät auf dem Bus, dass ein Master mit der Kommunikation beginnen möchte und sie sich bereit machen sollten. Sobald die START-Bedingung erzeugt wurde, wird SCL auf LOW gezogen und beginnt zu pulsen, um den Takt für die Nachricht bereitzustellen. Der Master ist für das Pulsen des Taktes verantwortlich. Der Master beendet eine Nachricht durch Erzeugen einer STOPP-Bedingung. Eine STOPP-Bedingung tritt auf, wenn es einen LOW-zu-HIGH-Übergang auf SDA gibt, während SCL HIGH ist. Sobald SDA auf HIGH geht, bleibt auch SCL HIGH, was anzeigt, dass der Bus wieder im Ruhezustand ist.
+- Innerhalb einer Nachricht sind die Daten in Frames und Steuer-/Statussignale unterteilt. Jeder Taktimpuls innerhalb der I²C-Nachricht wird mit Perioden nummeriert. Der erste Taktimpuls nach Initiierung einer Nachricht wird als "Periode 1" bezeichnet. Der zweite Taktimpuls wird als "Periode 2" bezeichnet, und so weiter. Sowohl der Master als auch die Slaves zählen die Anzahl der Perioden, die seit dem Start der Nachricht aufgetreten sind, um zu wissen, wann bestimmte Frames und Signale auf dem Bus vorhanden sein sollten. Dies ist entscheidend, damit jedes Gerät weiß, wann es innerhalb der Nachricht kommunizieren darf. Dies verhindert, dass mehrere Geräte die SDA-Leitung zum falschen Zeitpunkt herunterziehen und eine Überstromsituation verursachen.
+- **Nachrichtenstruktur im Detail**
+	- Nachdem der Master die START-Bedingung erzeugt hat, sendet er zunächst die Slave-Adresse, mit der er kommunizieren möchte. I²C-Slave-Adressen können entweder 7 Bit (Standard) oder 10 Bit sein. Auf die Slave-Adresse folgt das Lese-/Schreibsignal, das angibt, welche Art von Transaktion in der Nachricht angefordert wird. Die START-Bedingung, die Slave-Adresse und das Lese-/Schreibsignal umfassen die Perioden 1-8.
+	- Periode 9 der Nachricht ist für das Slave-Acknowledge (ACK) oder No-Acknowledge (NACK) Signal reserviert. Nachdem der Master die Slave-Adresse und das Lese-/Schreibsignal gesendet hat, überprüft jeder Slave auf dem Bus, ob er adressiert wird. Wenn ein Slave mit der angegebenen Slave-Adresse existiert, sendet er ein ACK-Signal zurück an den Master, indem er SDA auf LOW zieht. Wenn der Master das ACK-Signal sieht, weiß er, dass ein Slave mit der angegebenen Adresse existiert und fährt mit der Nachricht fort.
+	- Wenn kein Gerät auf dem Bus mit der angegebenen Slave-Adresse existiert, wird kein Gerät SDA herunterziehen. Dies führt dazu, dass Periode 9 auf HIGH bleibt und als NACK interpretiert wird. Ein NACK in Periode 9 teilt dem Master mit, dass kein Slave mit der angegebenen Adresse existiert. Der Master erzeugt dann eine STOPP-Bedingung und beendet die Nachricht.
+- **Datenübertragungsphase**
+	- Nach einer erfolgreichen ACK-Bestätigung vom Slave werden die Daten dann 8 Bit auf einmal gesendet, beginnend mit dem MSB (Most Significant Bit).Nach dem Senden jedes Bytes sendet das empfangende Gerät ein ACK-Signal, das anzeigt, dass es die Daten erfolgreich empfangen hat.
+	- Wenn der Master an einen Slave schreibt, sendet der Master die 8 Bits Daten und der Slave erzeugt das ACK/NACK-Signal.
+	- Wenn der Master von einem Slave liest, sendet der Slave die 8 Bits Daten und der Master erzeugt das ACK/NACK-Signal.
+	- Nachdem die Daten gesendet und bestätigt wurden, kann der Master die Nachricht beenden, indem er die STOPP-Bedingung erzeugt.
+- ![[Pasted image 20250520015908.png]]
+- ![[Pasted image 20250520061923.png]]
+- Multiple bytes of data
+- ![[Pasted image 20250520062009.png]]
+- ![[Pasted image 20250520062249.png]]
+- ![[Pasted image 20250520062514.png]]
+- ![[Pasted image 20250520062849.png]]
+- In situations where the slave contains multiple registers, the master can also write a block of data. This is handled by the slave by automatically incrementing its register address after each byte of data is written. The master still sends the slave address, the write signal, and the starting register address. The next byte of data that is sent goes into the first register address location. The slave then increments its register address. The next byte written by the master goes into the next register address. The slave will continue to increment its register address until it sees the STOP condition generated by the master. This allows the master to write a block of data to the registers within the slave while only providing the starting address of the register array.
+- ![[Pasted image 20250520063155.png]]
+- ![[Pasted image 20250520063232.png]]
+
+
+## I2C Master Operationen
+- ![[Pasted image 20250520064242.png]]
+- eUSCI_B Register im I2C-Modus
+	- - **UCBxCTLW0** (eUSCI_B Kontrollwort 0) – hat unterschiedliche Bitfelder im I2C-Modus
+	- **UCBxCTLW1** (eUSCI_B Kontrollwort 1) – hat unterschiedliche Bitfelder im I2C-Modus
+	- **UCBxBRW** (eUSCI_B Bitraten-Kontrollwort) – gleiche Funktion wie im SPI-Modus
+	- **UCBxSTATW** (eUSCI_B Status) – hat unterschiedliche Bitfelder im I2C-Modus
+	- **UCBxTBCNT** (eUSCI_B Bytezähler-Schwellwert)
+	- **UCBxRXBUF** (eUSCI_B Empfangspuffer) – gleiche Funktion wie im SPI-Modus
+	- **UCBxTXBUF** (eUSCI_B Sendepuffer) – gleiche Funktion wie im SPI-Modus
+	- **UCBxI2COA0** (eUSCI_B I2C eigene Adresse 0)
+	- **UCBxI2COA1** (eUSCI_B I2C eigene Adresse 1)
+	- **UCBxI2COA2** (eUSCI_B I2C eigene Adresse 2)
+	- **UCBxI2COA3** (eUSCI_B I2C eigene Adresse 3)
+	- **UCBxADDRX** (eUSCI_B empfangene Adresse)
+	- **UCBxADDMASK** (eUSCI_B Adressmaske)
+	- **UCBxI2CSA** (eUSCI_B I2C Slave-Adresse)
+	- **UCBxIE** (eUSCI_B Interrupt-Freigabe) – hat unterschiedliche Bitfelder im I2C-Modus
+	- **UCBxIFG** (eUSCI_B Interrupt-Flag) – hat unterschiedliche Bitfelder im I2C-Modus
+	- **UCBxIV** (eUSCI_B Interrupt-Vektor) – hat unterschiedliche Bitfelder im I2C-Modus
+- **Writing Data as an I2C Master**
+	- ### Initialisierung des I2C-Peripheriegeräts (Übersetzung und Erklärung)
+		- Der erste Schritt bei der Einrichtung des I2C-Peripheriegeräts besteht darin, das System in einen Software-Reset zu versetzen, um zu vermeiden, dass während der Einrichtung fehlerhafte Daten übertragen werden. Dies geschieht durch Setzen des UCSWRST-Bits im eUSCI_Bx-Kontrollwort 0 (UCBxCTLW0)-Register. Nach einem Reset ist UCSWRST = 1, sodass sich eUSCI_Bx standardmäßig im Software-Reset befindet; es ist jedoch gute Praxis, dieses Bit explizit zu setzen, um sicherzustellen, dass das System deaktiviert ist.
+		- ![[Pasted image 20250520064925.png]]
+	-  **UCBxCTLW1-Register und automatische STOP-Bedingungsgenerierung**
+		- Es gibt zusätzliche Konfigurationsbits für die Einrichtung eines grundlegenden I2C-Master-Transmitters im UCBxCTLW1-Register. Die am häufigsten verwendete Einstellung ist die automatische STOP-Bedingungsgenerierung (UCASTPx). Wenn UCASTPx = 10 ist, wird der Master automatisch die STOP-Bedingung generieren, sobald die gewünschte Anzahl von Datenbytes gesendet oder empfangen wurde.
+		- ![[Pasted image 20250520065900.png]]
+	-  **UCBxI2CSA (Slave-Adresse)**
+		- Enthält die Adresse des Slave-Geräts, mit dem kommuniziert werden soll.
+		- Wird im Master-Modus verwendet, um anzugeben, welchen Slave man adressieren möchte.
+		- ![[Pasted image 20250520070438.png]]
+	- **UCBxTBCNT (Bytezähler-Schwellwert)**
+		- Definiert die Anzahl der Bytes, die automatisch übertragen/empfangen werden sollen.
+		- Wird in Verbindung mit dem automatischen Stopp-Bedingungsmodus verwendet.
+		- ![[Pasted image 20250520070457.png]]
+	- **UCBxIE (Interrupt-Freigabe)**
+		- Bestimmt, welche Ereignisse Interrupts auslösen können:
+			- ![[Pasted image 20250520070544.png]]
+	- **UCBxIFG (Interrupt-Flags)**
+		- Zeigt an, welche Ereignisse aufgetreten sind und möglicherweise einen Interrupt ausgelöst haben:
+			- ![[Pasted image 20250520070623.png]]
+	- **UCBxIV (Interrupt-Vektor)**
+		- Dieses Register enthält einen Vektorwert, der die höchste Priorität des ausstehenden Interrupts angibt.
+		- Es wird in Interrupt-Serviceroutinen verwendet, um schnell die Ursache des Interrupts zu bestimmen.
+		- Durch Lesen dieses Registers wird automatisch das Flag mit der höchsten Priorität gelöscht.
+		- ![[Pasted image 20250520070723.png]]
+- ![[Pasted image 20250520070757.png]]
+- ![[Pasted image 20250520070938.png]]
+- ![[Pasted image 20250520071045.png]]
+## Reading Data as an I2C Master
+- Beim Lesen von einem Slave folgen wir vielen der Initialisierungsschritte wie beim Senden. Wir konfigurieren weiterhin die Geschwindigkeit von SCL mit UCB0BRW, versetzen das Peripheriegerät mit UCMODEx in den I2C-Modus und machen es mit UCMST zu einem Master. Wir legen weiterhin die Slave-Adresse, mit der kommuniziert werden soll, in UCB0I2CA fest und geben die Anzahl der Bytes an, die vor einer automatischen STOPP-Bedingung übertragen werden sollen, mit UC0TBCNT. Der einzige Unterschied während der eUSCI_B0-Initialisierung für das Lesen besteht darin, das Peripheriegerät mit UCTR = 0 in den Empfangsmodus zu versetzen. Beim Lesen wird das UCRXIFG0-Flag gesetzt, wenn der Slave ein Datenbyte zurücksendet und es im Rx-Puffer ankommt. Dieses Flag löst einen eUSCI_B0-Interrupt aus. Innerhalb der eUSCI_B0-Serviceroutine speichern wir einfach den Rx-Pufferwert in einer Variable. Im Lesemodus erzeugt der Master nach dem letzten Byte in der Übertragung ein NACK-Signal, wie durch den Wert in UC0TBCNT vorgegeben. Betrachten wir ein Programm, das kontinuierlich ein Datenbyte von einem Slave mit der Slave-Adresse 0x68 liest. In diesem Programm werden wir kontinuierlich eine START-Bedingung erzeugen, indem wir UCTXSTT innerhalb der Hauptschleife setzen. Wir werden eine Rx-Interrupt-Serviceroutine verwenden, um den im Rx-Puffer empfangenen Wert zu lesen.
+- ![[Pasted image 20250520071432.png]]
+- ![[Pasted image 20250520071459.png]]
+- ![[Pasted image 20250520071825.png]]
+- Betrachten wir nun ein Beispiel für das Lesen von einer spezifischen Registeradresse innerhalb des Slave-Geräts. Zur Erinnerung: Dies wird durch das Senden von zwei Nachrichten erreicht; die erste ist eine Schreibnachricht, die die Registeradresse im Datenframe bereitstellt; die zweite ist eine Lesenachricht, die die Daten aus der angegebenen Registeradresse vom Slave zum Master überträgt. Es gibt verschiedene Möglichkeiten, dieses Design umzusetzen. Das vorgestellte Beispiel erzeugt die Start-Bedingungen für die beiden Nachrichten in der Haupt-while()-Schleife und überlässt dann der eUSCI_B0-Interrupt-Serviceroutine das Senden der Registeradresse während der Schreibnachricht und das Empfangen der Daten während der Lesenachricht. Bei diesem Ansatz muss zwischen den beiden Start-Bedingungen eine Funktionalität vorhanden sein, die wartet, bis die vorherige Nachricht abgeschlossen ist, bevor die nächste Nachricht gesendet werden kann. Dies wird durch Abfragen des STOP-Flags (UCSTPIFG) im UCB0IFG-Register erreicht. Dieses Flag wird gesetzt, sobald das Stopp-Bit für eine vollständige Nachricht erzeugt wurde.
+## I2C Slave Operation
+- Wenn ein MCU als I2C-Master fungiert, kann der MSP430FR2355 auch als I2C-Slave konfiguriert werden. Dies ermöglicht anderen I2C-Mastern, einige der Fähigkeiten des MCU zu nutzen, wie seine Timer, seinen ADC oder andere Peripheriegeräte. Die Konfiguration des MSP430FR2355 als Slave erfolgt durch Setzen von UCMODx = 11, um das Peripheriegerät in den I2C-Modus zu versetzen, und UCMST = 0, um es als Slave zu konfigurieren. Im Slave-Modus erzeugt der MCU kein SCL, daher ist keine Konfiguration von UCSSELx oder UCBRx erforderlich. Der MCU wird zunächst mit UCTR = 0 in den Empfangsmodus versetzt, um die I2C-Slave-Adresse zu empfangen, die der Master an alle Slaves sendet. Der MSP430FR2355 unterstützt bis zu vier separate und benutzerprogrammierbare Slave-Adressen. Jede dieser Slave-Adressen enthält unabhängige Interrupt-Flags für sowohl Tx als auch Rx. Die Slave-Adresswerte werden während der Initialisierung vom Benutzer in den eUSCI_Bx I2C Own Address n (UCBxI2COAn)-Registern gespeichert. Die vier spezifischen Registernamen im MSP430FR2355 sind UCBxI2CA3, UCBxI2CA2, UCBxI2CA1 und UCBxI2CA0. Jedes dieser Register enthält ein Own Address Enable (UCOAEN)-Bit an Position 10, das gesetzt sein muss, wenn das Slave-Adressregister aktiv sein soll. Das UCBxI2CA0-Register ist einzigartig, da seine 15. Position das General Call Response Enable (ECGEN) für das gesamte Slave-System des MCU ist. Die 15. Positionen in den anderen drei I2C-eigenen Adressregistern sind reserviert.
+- ![[Pasted image 20250520072613.png]]
+- ### General Call-Funktionalität
+- Das ECGEN-Bit im UCBxI2CA0-Register ermöglicht dem Slave, auf General Call-Adressen (0x00) zu reagieren. Dies ist nützlich für:
+	- Broadcast-Befehle an alle Geräte am Bus
+	- Systemweite Reset- oder Konfigurationsbefehle
+	- Synchronisierung mehrerer Slaves
+- Im Slave-Modus wird, wenn die vom Master gesendete I2C-Slave-Adresse mit einem der Werte in einem aktivierten UCBxI2COAn-Register übereinstimmt, automatisch ein ACK gesendet und das UCSTTIFG-Flag gesetzt. Ob der MCU senden oder empfangen soll, wird automatisch durch Setzen des entsprechenden UCTXIFG- oder UCRXIFG-Flags im Slave konfiguriert (d.h. es ist nicht notwendig, UCTR manuell zu konfigurieren). Der Benutzer muss einfach nur innerhalb der eUSCI_B-Serviceroutine, abhängig von der Art der angeforderten Datenübertragung, den Tx- oder Rx-Puffer lesen oder beschreiben. Für eine Slave-Übertragung werden Daten in den Tx-Puffer gelegt und automatisch herausgeschoben. Der Master sendet ein ACK zurück, wenn er ein weiteres Byte empfangen möchte. Dieses ACK löst einen weiteren Sende-Interrupt aus, damit der MCU mehr Daten senden kann. Wenn der Master keine Daten mehr empfangen möchte, sendet er ein NACK gefolgt von der STOP-Bedingung, um die Nachricht zu beenden. Für einen Slave-Empfang schiebt der Master Daten in das Rx-Schieberegister. Nach Abschluss werden die Daten in den Rx-Puffer übertragen und das UCRXIFG wird gesetzt, was anzeigt, dass die Daten bereit sind, in eine interne Variable übertragen zu werden. Der Slave sendet dann ein ACK-Signal zurück an den Master.

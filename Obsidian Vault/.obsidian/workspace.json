@@ -195,16 +195,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "konuşma.md",
+                "file": "Embedded/microcontroller/7-AD Wandler.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "konuşma"
+              "title": "7-AD Wandler"
+            }
+          },
+          {
+            "id": "6d430b91547e6348",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Embedded/microcontroller/7-AD Wandler.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "7-AD Wandler"
             }
           }
         ],
-        "currentTab": 13
+        "currentTab": 14
       }
     ],
     "direction": "vertical"
@@ -360,26 +374,37 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2f7c68e015cb3441",
+  "active": "6d430b91547e6348",
   "lastOpenFiles": [
+    "gezilecek yerler.md",
+    "Embedded/microcontroller/7-AD Wandler.md",
+    "Pasted image 20250530133314.png",
+    "Pasted image 20250530133304.png",
+    "Pasted image 20250530133140.png",
+    "Pasted image 20250530133049.png",
+    "Pasted image 20250530133043.png",
+    "Pasted image 20250530133037.png",
+    "Pasted image 20250530133030.png",
+    "Pasted image 20250530133002.png",
+    "Pasted image 20250530132935.png",
+    "Pasted image 20250530132931.png",
+    "Embedded/microcontroller/6-Interrupts.md",
+    "machine learning/Multilayer Perceptron.md",
     "Embedded/microcontroller/5-Serielle Schnittstellen.md",
-    "konuşma.md",
-    "Pasted image 20250504163326.png",
-    "Pasted image 20250504163316.png",
-    "Pasted image 20250504163304.png",
-    "Pasted image 20250504163156.png",
-    "Pasted image 20250504161854.png",
-    "Pasted image 20250504161354.png",
-    "Pasted image 20250504161125.png",
+    "Style-Transfer/Multiobjekterkennung mit CNNs.md",
+    "Style-Transfer/A fast object detection algorithm – YOLO.md",
+    "Style-Transfer/A Neural Algorithm of Artistic Style.md",
+    "Style-Transfer/Fully Convolutional Networks (FCN) für Objekterkennung.md",
+    "Style-Transfer/Object detection - Evaluating.md",
+    "machine learning/SVM.md",
     "machine learning/K Nearest Neighbor.md",
-    "Pasted image 20250504140244.png",
-    "Pasted image 20250504135551.png",
-    "Pasted image 20250504135537.png",
-    "machine learning/Untitled.md",
+    "machine learning/Naive Bayes.md",
+    "konuşma.md",
+    "Style-Transfer/Untitled",
+    "Style-Transfer",
     "Methoden der Datenanalyse/final.md",
     "machine learning/decision trees.md",
     "research questions.md",
-    "machine learning/Naive Bayes.md",
     "Embedded/microcontroller/4-Timer.md",
     "Embedded/microcontroller/3-Digital IOs.md",
     "Embedded/microcontroller/2-MSP430F5529.md",
@@ -389,15 +414,6 @@
     "linux/systemctl.md",
     "linux/scp.md",
     "NN/CNN Architectures.md",
-    "NN/RNN.md",
-    "power/first law.md",
-    "Quizhoot/Anforderungen.md",
-    "RL/1-The n-armed bandit problem.md",
-    "RL/2-Action-Value-Methods.md",
-    "RL/Reward Distribution.md",
-    "seren/mavlink.md",
-    "seren/Mavlink messaging.md",
-    "seren/Ros2.md",
     "Untitled 1",
     "machine learning",
     "Embedded/microcontroller",
@@ -409,8 +425,6 @@
     "Quizhoot",
     "Untitled.canvas",
     "Untitled 1.canvas",
-    "RL/Untitled",
-    "RL",
     "AlgoDat/Untitled.canvas"
   ]
 }

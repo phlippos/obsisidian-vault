@@ -1,0 +1,16 @@
+İtalya
+- sicilya
+- portofino
+- roma
+- ferrari müzesi
+- cenova
+- kolezyum
+- Cinque Terre
+- panteon
+-  Piazza delle Erbe
+- Ancient Theatre of Taormina
+- Pompeii Archaeological Park
+- Sassi di Matera
+- Parco Nazionale delle Cinque Terre
+- Como Gölü
+- Blue Grotto
