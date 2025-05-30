@@ -681,5 +681,327 @@ ADC12CTL1 |= ADC12CONSEQ_2;  // Repeat-single-channel
 ```
 
 Das ADCCTL1 Register ist entscheidend für die **Timing-Konfiguration** und den **Betriebsmodus** des ADCs und muss sorgfältig an die Anwendungsanforderungen angepasst werden.
-![[Pasted image 20250530132622.png]]![[Pasted image 20250530133030.png]]![[Pasted image 20250530133037.png]]![[Pasted image 20250530133043.png]]![[Pasted image 20250530133049.png]]![[Pasted image 20250530133140.png]]![[Pasted image 20250530133304.png]]
+![[Pasted image 20250530132622.png]]![[Pasted image 20250530133030.png]]
+# ADC Conversion Memory Control (ADCMCTL0) Register - Detaillierte Erklärung
+
+## **Registerübersicht**
+
+Das **ADCMCTL0** Register konfiguriert die **Wandlungsparameter** für den ersten Speicherplatz (MEM0) des ADCs. Jeder Speicherplatz (MEM0-MEM15) hat sein eigenes MCTLx Register.
+
+## **Bit-für-Bit Erklärung**
+
+### **Bits 15-7: Reserved**
+
+- **Zweck**: Reserviert für zukünftige Nutzung
+- **Wert**: Immer 0
+- **Hinweis**: Nicht verändern
+
+---
+
+### **Bits 6-4: ADCSREFx (ADC Reference Voltage Select)**
+
+- **Zweck**: Wählt die **Referenzspannungsquelle** für diese Wandlung
+
+#### **Referenzspannungsoptionen:**
+
+c
+
+```c
+ADCSREF_0 = 000b = VR+ = AVCC, VR- = AVSS
+ADCSREF_1 = 001b = VR+ = VREF, VR- = AVSS  
+ADCSREF_2 = 010b = VR+ = VEREF+ buffered, VR- = AVSS
+ADCSREF_3 = 011b = VR+ = VEREF+ buffered, VR- = AVSS
+ADCSREF_4 = 100b = VR+ = AVCC, VR- = VREF-
+ADCSREF_5 = 101b = VR+ = VREF, VR- = VREF-
+ADCSREF_6 = 110b = VR+ = VEREF+ buffered, VR- = VREF-
+ADCSREF_7 = 111b = VR+ = VEREF+, VR- = VREF-
+```
+
+#### **Praktische Bedeutung:**
+
+**ADCSREF_0 (Standard):**
+
+- **VR+ = AVCC** (meist 3,3V oder 5V)
+- **VR- = AVSS** (0V/GND)
+- **Messbereich**: 0V bis Versorgungsspannung
+- **Für**: Allgemeine Spannungsmessungen
+
+**ADCSREF_1 (Interne Referenz):**
+
+- **VR+ = VREF** (1,5V, 2,0V oder 2,5V)
+- **VR- = AVSS** (0V/GND)
+- **Messbereich**: 0V bis Referenzspannung
+- **Für**: Präzise Messungen, unabhängig von Versorgungsspannung
+
+#### **Beispiel-Code:**
+
+c
+
+```c
+// Versorgungsspannung als Referenz
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_1;
+
+// Interne 1,5V Referenz
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_1;
+```
+
+---
+
+### **Bits 3-0: ADCINCHx (ADC Input Channel Select)**
+
+- **Zweck**: Wählt den **Eingangskanal** für diese Wandlung
+
+#### **Verfügbare Kanäle:**
+
+c
+
+```c
+ADCINCH_0  = 0000b = A0/VEREF+ (P1.0)
+ADCINCH_1  = 0001b = A1 (P1.1)  
+ADCINCH_2  = 0010b = A2/VEREF- (P1.2)
+ADCINCH_3  = 0011b = A3 (P1.3)
+ADCINCH_4  = 0100b = A4 (P1.4)
+ADCINCH_5  = 0101b = A5 (P1.5)
+ADCINCH_6  = 0110b = A6 (P1.6)
+ADCINCH_7  = 0111b = A7 (P1.7)
+ADCINCH_8  = 1000b = A8 (P5.0)
+ADCINCH_9  = 1001b = A9 (P5.1)
+ADCINCH_10 = 1010b = A10 (P5.2) - Temperatursensor
+ADCINCH_11 = 1011b = A11 (P5.3)
+ADCINCH_12 = 1100b = A12 (on-chip temperature sensor)
+ADCINCH_13 = 1101b = A13 (internal reference voltage)
+ADCINCH_14 = 1110b = A14 (DVSS)
+ADCINCH_15 = 1111b = A15 (DVCC)
+```
+
+#### **Spezielle interne Kanäle:**
+
+**A10/A12 - Temperatursensor:**
+
+- **Zweck**: Interne Temperaturmessung
+- **Typ**: Integrierter Silizium-Temperatursensor
+- **Kalibrierung**: Werkskalibriert bei 30°C und 85°C
+
+**A13 - Interne Referenzspannung:**
+
+- **Zweck**: Überwachung der internen Referenz
+- **Nutzen**: Kalibrierung und Selbsttest
+
+**A14 - DVSS (Digital Ground):**
+
+- **Zweck**: Offset-Kalibrierung
+- **Sollwert**: Nahe 0V
+
+**A15 - DVCC (Digital Supply):**
+
+- **Zweck**: Versorgungsspannungsüberwachung
+- **Nutzen**: Battery-Monitoring
+
+---
+
+## **Praktische Konfigurationsbeispiele**
+
+### **Externe Spannung messen (Standard):**
+
+c
+
+```c
+// Kanal A1 mit Versorgungsspannung als Referenz
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_1;
+
+// Berechnung: Vin = (ADC_Wert/4095) × AVCC
+```
+
+### **Präzise Spannungsmessung:**
+
+c
+
+```c
+// Kanal A2 mit interner 1,5V Referenz
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_2;
+
+// Berechnung: Vin = (ADC_Wert/4095) × 1,5V
+```
+
+### **Temperaturmessung:**
+
+c
+
+```c
+// Interner Temperatursensor
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_10;
+
+// Kalibrierung mit Werks-Kalibrierdaten erforderlich
+```
+
+### **Batteriespannungsüberwachung:**
+
+c
+
+```c
+// DVCC-Überwachung mit interner Referenz
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_15;
+
+// DVCC = (ADC_Wert/4095) × 1,5V × 2  // Spannungsteiler beachten
+```
+
+### **Offset-Kalibrierung:**
+
+c
+
+```c
+// DVSS messen für Nullpunkt-Kalibrierung
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_14;
+
+// Sollwert: nahe 0
+```
+
+---
+
+## **Multi-Channel Sequenz-Konfiguration**
+
+### **Sequenzielle Kanalmessung:**
+
+c
+
+```c
+// MEM0: Kanal A0
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_0;
+
+// MEM1: Kanal A1  
+ADC12MCTL1 = ADC12SREF_0 + ADC12INCH_1;
+
+// MEM2: Temperatursensor
+ADC12MCTL2 = ADC12SREF_1 + ADC12INCH_10;
+
+// MEM3: Versorgungsspannung (Ende der Sequenz)
+ADC12MCTL3 = ADC12SREF_1 + ADC12INCH_15 + ADC12EOS;
+```
+
+### **Verschiedene Referenzen pro Kanal:**
+
+c
+
+```c
+// Hochpräzise Messung mit interner Referenz
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_0;  // 1,5V Referenz
+
+// Vollbereich-Messung mit Versorgungsspannung
+ADC12MCTL1 = ADC12SREF_0 + ADC12INCH_1;  // AVCC Referenz
+
+// Differentielle Messung  
+ADC12MCTL2 = ADC12SREF_5 + ADC12INCH_2;  // VREF+ und VREF-
+```
+
+---
+
+## **Spannungsberechnung für verschiedene Referenzen**
+
+### **Mit Versorgungsspannung (ADCSREF_0):**
+
+c
+
+```c
+float voltage = (float)adc_value * AVCC / 4095.0f;
+
+// Beispiel: AVCC = 3,3V, ADC = 2048
+// voltage = 2048 * 3,3V / 4095 = 1,65V
+```
+
+### **Mit interner 1,5V Referenz (ADCSREF_1):**
+
+c
+
+```c
+float voltage = (float)adc_value * 1.5f / 4095.0f;
+
+// Beispiel: ADC = 2730 
+// voltage = 2730 * 1,5V / 4095 = 1,0V
+```
+
+### **Temperatursensor-Berechnung:**
+
+c
+
+```c
+// Mit Kalibrierdaten bei 30°C und 85°C
+float temp = ((float)adc_value - CAL_30C) * 55.0f / 
+             (CAL_85C - CAL_30C) + 30.0f;
+```
+
+---
+
+## **Optimierung für verschiedene Anwendungen**
+
+### **Maximale Präzision:**
+
+c
+
+```c
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_0;  // Interne Referenz
+// + längere Sample-Zeit in ADCCTL0
+// + mehrfache Messungen und Mittelwert
+```
+
+### **Maximaler Messbereich:**
+
+c
+
+```c
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_0;  // Versorgungsspannung
+// Messbereich: 0V bis AVCC
+```
+
+### **Differentielle Messung:**
+
+c
+
+```c
+ADC12MCTL0 = ADC12SREF_7 + ADC12INCH_0;  // VEREF+ und VREF-
+// Für kleine Signale mit großem Offset
+```
+
+---
+
+## **Häufige Anwendungsfehler**
+
+### **Problem: Falscher Messbereich**
+
+c
+
+```c
+// ❌ Falsch: 5V Signal mit 1,5V Referenz
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_0;  // Überlauf!
+
+// ✅ Richtig: 5V Signal mit Versorgungsreferenz
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_0;  // Vollbereich
+```
+
+### **Problem: Temperatursensor ohne Referenz**
+
+c
+
+```c
+// ❌ Falsch: Temperatursensor mit variabler Referenz
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_10;
+
+// ✅ Richtig: Temperatursensor mit fester Referenz  
+ADC12MCTL0 = ADC12SREF_1 + ADC12INCH_10;
+```
+
+### **Problem: Ungeeignete Kanalwahl**
+
+c
+
+```c
+// ❌ Falsch: Nicht verfügbarer Kanal
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_16;  // Existiert nicht!
+
+// ✅ Richtig: Verfügbarer Kanal verwenden
+ADC12MCTL0 = ADC12SREF_0 + ADC12INCH_1;   // A1 verfügbar
+```
+
+Das ADCMCTL0 Register ist entscheidend für die **Kanal- und Referenzauswahl** und muss präzise auf die jeweilige Messaufgabe abgestimmt werden.
+
+![[Pasted image 20250530133037.png]]![[Pasted image 20250530133043.png]]![[Pasted image 20250530133049.png]]![[Pasted image 20250530133140.png]]![[Pasted image 20250530133304.png]]
 ![[Pasted image 20250530133314.png]]
