@@ -53,7 +53,7 @@ When preparing data for machine learning algorithms, especially distance-based m
 
 ## Choosing Between Normalization and Standardization
 
-The decision between normalization and standardization depends on:
+<mark style="background: #FFB86CA6;">The decision between normalization and standardization depends on:</mark>
 
 1. **Data distribution**:
     - **Normal distribution** → Use standardization
@@ -78,7 +78,7 @@ The decision between normalization and standardization depends on:
 
 # Edited k-NN: Enhancing Instance Selection
 
-Edited k-NN algorithms address one of the key limitations of traditional k-NN: the need to store all training instances. By intelligently selecting which instances to keep in memory, these techniques can:
+<mark style="background: #FFB86CA6;">Edited k-NN algorithms address one of the key limitations of traditional k-NN: the need to store all training instances. By intelligently selecting which instances to keep in memory, these techniques can:</mark>
 
 1. Reduce memory requirements
 2. Speed up classification
@@ -142,7 +142,7 @@ Algorithm: Incremental Growth
 
 # Choosing the Right k Value in k-NN
 
-The selection of k (number of neighbors) is one of the most important hyperparameters in k-NN and significantly affects performance. Here's a comprehensive guide to choosing an appropriate k value:
+<mark style="background: #FFB86CA6;">The selection of k (number of neighbors) is one of the most important hyperparameters in k-NN and significantly affects performance. Here's a comprehensive guide to choosing an appropriate k value</mark>:
 
 ## Key Considerations for Selecting k
 
@@ -219,7 +219,7 @@ K-dimensional trees (k-d trees) are space-partitioning data structures that orga
 
 ## Key Characteristics of KD-Trees
 
-A k-d tree differs from standard decision trees in several important ways:
+<mark style="background: #FFB86CA6;">A k-d tree differs from standard decision trees in several important ways:</mark>
 
 1. **Storage of Instances**:
     - Each internal node stores exactly one training instance (not a decision rule)
@@ -273,7 +273,7 @@ Consider a 2D space with points labeled A(40,45), B(15,70), C(70,10), D(69,50), 
 
 ## Performance Benefits
 
-- Average case search time: O(log n) vs. O(n) for brute force
+- <mark style="background: #FFB86CA6;">Average case search time</mark>: O(log n) vs. O(n) for brute force
 - Construction time: O(n log n)
 - Most efficient for low to medium dimensional data (typically < 20 dimensions)
 - Particularly effective when the number of dimensions is much smaller than the number of points

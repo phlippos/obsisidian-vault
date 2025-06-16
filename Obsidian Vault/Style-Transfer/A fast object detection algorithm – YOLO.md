@@ -35,7 +35,7 @@
 ## The YOLO backbon
 ![[Pasted image 20250517085859.png]]
 ## Introducing anchor boxes
-- if most of the objects in the train dataset are big, the network will tend to predict w and h as being very large. And when using the trained model on small objects, it will often fail. To fix this problem, YOLO v2 introduced anchor boxes.
+- <mark style="background: #FFB86CA6;">if most of the objects in the train dataset are big, the network will tend to predict w and h as being very large. And when using the trained model on small objects, it will often fail.</mark> To fix this problem, YOLO v2 introduced anchor boxes.
 - Anchor boxes (also called priors) are a set of bounding box sizes that are decided upon before training the network.
 - For instance, when training a neural network to detect pedestrians, tall and narrow anchor boxes would be picked.,
 - ![[Pasted image 20250517093240.png]]
